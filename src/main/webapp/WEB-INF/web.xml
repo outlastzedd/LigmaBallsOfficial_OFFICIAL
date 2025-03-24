@@ -4,28 +4,12 @@
    xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
    version="6.0">
     <servlet>
-        <servlet-name>Test</servlet-name>
-        <servlet-class>controller.mainTest</servlet-class>
+        <servlet-name>AuthServlet</servlet-name>
+        <servlet-class>controller.AuthServlet</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>Test</servlet-name>
-        <url-pattern>/Test</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/logingg</url-pattern>
-    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AuthServlet</servlet-name>
         <url-pattern>/authservlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SearchServlet</servlet-name>
-        <url-pattern>/search</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>/resource/*</url-pattern>
     </servlet-mapping>
     <listener>
         <description>HttpSessionAttributeListener</description>
