@@ -26,7 +26,7 @@ public class ProductServlet extends HttpServlet {
     private final CategoryDAO categoryDAO = new CategoryDAO();
 
     static {
-        Dotenv dotenv = Dotenv.configure().load();
+        Dotenv dotenv = Dotenv.configure().directory("./").ignoreIfMissing().load();
         System.out.println("ProductServlet: Loaded environment variables from .env");
         System.setProperty("JDBC_DATABASE_URL", dotenv.get("JDBC_DATABASE_URL"));
     }
