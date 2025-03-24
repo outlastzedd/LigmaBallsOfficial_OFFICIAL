@@ -13,7 +13,6 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.util.List;
 
-import jakarta.servlet.http.HttpSession;
 import model.Categories;
 import model.Products;
 import productDAO.ProductDAO;
@@ -21,7 +20,7 @@ import productDAO.ProductDAO;
 @WebServlet(name = "ProductServlet", urlPatterns = {"/products"})
 public class ProductServlet extends HttpServlet {
 
-    private ProductDAO productDAO = new ProductDAO();
+    private final ProductDAO productDAO = new ProductDAO();
 
     static {
         Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
