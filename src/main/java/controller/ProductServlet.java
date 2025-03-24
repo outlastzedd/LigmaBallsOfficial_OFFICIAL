@@ -1,6 +1,5 @@
 package controller;
 
-import categoryDAO.CategoryDAO;
 import jakarta.servlet.RequestDispatcher;
 import io.github.cdimascio.dotenv.Dotenv;
 
@@ -23,19 +22,24 @@ import productDAO.ProductDAO;
 public class ProductServlet extends HttpServlet {
 
     private final ProductDAO productDAO = new ProductDAO();
-    private final CategoryDAO categoryDAO = new CategoryDAO();
 
     static {
-        Dotenv dotenv = Dotenv.configure().directory("./").ignoreIfMissing().load();
+        Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
         System.out.println("ProductServlet: Loaded environment variables from .env");
-        System.setProperty("JDBC_DATABASE_URL", dotenv.get("JDBC_DATABASE_URL"));
+        String URL = dotenv.get("JDBC_DATABASE_URL");
+        System.out.println("ProductServlet: JDBC_DATABASE_URL = " + URL);
+        if (URL != null) {
+            System.setProperty("JDBC_DATABASE_URL", dotenv.get("JDBC_DATABASE_URL"));
+        }
+        System.out.println("ProductServlet: SystemProperty JDBC_DATABASE_URL = " + System.getProperty("JDBC_DATABASE_URL"));
+        System.out.println("ProductServlet: EnvProperty JDBC_DATABASE_URL = " + System.getenv("JDBC_DATABASE_URL"));
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
+        //HttpSession session = request.getSession();
         String weather = request.getParameter("weather");
         weather = (weather == null ? "all" : weather);
 
@@ -48,45 +52,15 @@ public class ProductServlet extends HttpServlet {
         if (query.equals("rong")) {
             query = "";
         }
-//        List<Products> categoryProduct=categoryDAO.categorizeProducts(Integer.parseInt(categoryID), query);
-
-//         List<Products> weatherProduct = categoryDAO.categorizeProductWithWeather(categoryProduct, weather);
-
-//        if (categoryID != null && !categoryID.isEmpty()) {
-//            try {
-//                products = categoryDAO.categorizeProducts(Integer.parseInt(categoryID), query);
-//                if (!weather.equalsIgnoreCase("all")) {
-//                    products = categoryDAO.categorizeProductWithWeather(products, weather);
-//                }
-//            } catch (NumberFormatException e) {
-//                products = productDAO.selectAllProducts();
-//            }
-//        } else if (query.isEmpty()) {
-//            products = productDAO.selectAllProducts();
-//        } else {
-//            products = productDAO.searchProduct(query);
-//        }
-
         System.out.println("FINAL PRODUCTS LIST");
         products.forEach(System.out::println);
-//
-//        if ((sortOrder.equalsIgnoreCase("asc") || sortOrder.equalsIgnoreCase("desc"))) {
-//            products = productDAO.sortProductsByPrice(products, sortOrder);
-//        }
+        request.setAttribute("weather", weather);
+        request.setAttribute("query", query);
+        request.setAttribute("products", products);
+        request.setAttribute("sortOrder", sortOrder);
 
-
-//        if (products != null && !products.isEmpty() && listCategory != null && !listCategory.isEmpty()) {
-            request.setAttribute("weather", weather);
-            request.setAttribute("query", query);
-            request.setAttribute("products", products);
-            request.setAttribute("sortOrder", sortOrder);
-
-            //send the products list to weather servlet
-//            session.setAttribute("categorizedProducts", categoryProduct);
-            request.setAttribute("category", listCategory);
-//        } else {
-//            System.out.println("NO PRODUCTS FOUND");
-//        }
+        //send the products list to weather servlet
+        request.setAttribute("category", listCategory);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("ligmaShop/login/guest.jsp");
         if (dispatcher == null) {
