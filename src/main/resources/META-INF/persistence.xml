@@ -47,10 +47,10 @@
     <class>model.resources.Colors</class>
     <class>model.resources.Productviews</class>
     <properties>
-        <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost\\SQLEXPRESS:1433;databaseName=LigmaShop;encrypt=false;trustServerCertificate=false"/>
+        <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://ligmashopprj.database.windows.net:1433;database=LigmaShop;user=nkmq21@ligmashopprj;password=268405Duy!;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;"/>
         <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
-        <property name="javax.persistence.jdbc.user" value="sa"/>
-        <property name="javax.persistence.jdbc.password" value="niggers69420"/>
+        <property name="javax.persistence.jdbc.user" value="nkmq21@ligmashopprj"/>
+        <property name="javax.persistence.jdbc.password" value="268405Duy!"/>
         <property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
         <property name="hibernate.hbm2ddl.auto" value="update"/>
         <property name="hibernate.show_sql" value="true"/>
