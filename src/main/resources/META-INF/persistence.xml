@@ -24,7 +24,7 @@
     <class>model.Shipping</class>
     <class>model.Orders</class>
     <properties>
-        <property name="jakarta.persistence.jdbc.url" value="jdbc:sqlserver://ligmashopprj.database.windows.net:1433;database=LigmaShop;user=nkmq21@ligmashopprj;password=268405Duy!;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30"/>
+        <property name="jakarta.persistence.jdbc.url" value="jdbc:sqlserver://ligmashopprj.database.windows.net:1433;database=LigmaShop;user=nkmq21@ligmashopprj;password=268405Duy!;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=120"/>
         <property name="jakarta.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
         <property name="jakarta.persistence.jdbc.user" value="nkmq21@ligmashopprj"/>
         <property name="jakarta.persistence.jdbc.password" value="268405Duy!"/>
