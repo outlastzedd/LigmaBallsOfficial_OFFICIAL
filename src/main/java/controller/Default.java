@@ -18,7 +18,7 @@ public class Default extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            request.getRequestDispatcher("/products").forward(request, response);
+            request.getRequestDispatcher("products").forward(request, response);
         }
     }
 
