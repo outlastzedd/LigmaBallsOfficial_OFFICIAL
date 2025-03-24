@@ -334,6 +334,7 @@ public class VNPayReturnServlet extends HttpServlet {
             if (cart != null) {
                 BigDecimal totalAmount = new BigDecimal(amount);
                 paymentDAO.processPayment(pendingTransaction, transactionId, totalAmount, cart);
+                session.removeAttribute("cart");
                 session.removeAttribute("cartItems");
             } else {
                 System.out.println("Cart is null - cannot process order in database");
@@ -383,6 +384,7 @@ public class VNPayReturnServlet extends HttpServlet {
                 if (cart != null) {
                     BigDecimal totalAmount = new BigDecimal(amount);
                     paymentDAO.processPayment(pendingTransaction, transactionId, totalAmount, cart);
+                    session.removeAttribute("cart");
                     session.removeAttribute("cartItems");
                 } else {
                     System.out.println("Cart is null - cannot process order in database");

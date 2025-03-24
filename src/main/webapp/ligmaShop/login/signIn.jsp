@@ -33,6 +33,11 @@
                                     <c:out value="${registered}"/>
                                 </div>
                             </c:if>
+                            <c:if test="${param.success == 'forgot_password'}">
+                                <div class="alert alert-success">
+                                    <c:out value="${message}"/>
+                                </div>
+                            </c:if>
                             <form action="${pageContext.request.contextPath}/authservlet" method="POST">
                                 <input type="hidden" name="action" value="login"/>
                                 <div class="form-sub-w3">
@@ -50,7 +55,7 @@
                                 <div class="form-sub-w3">
                                     <input type="checkbox" name="rememberMe" value="true" ${cookie.rememberMe.value}/> Remember Me 
                                 </div>
-                                <p class="p-bottom-w3ls">Forgot Password? <a href="#">Click here</a></p>
+                                <p class="p-bottom-w3ls">Forgot Password? <a href="${pageContext.request.contextPath}/ligmaShop/login/forgotPassword.jsp">Click here</a></p>
                                 <p class="p-bottom-w3ls1">New User? <a href="${pageContext.request.contextPath}/ligmaShop/login/register.jsp">Register here</a></p>
                                 <div class="clear"></div>
                                 <div class="submit-w3l">

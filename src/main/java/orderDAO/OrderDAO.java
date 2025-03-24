@@ -58,8 +58,8 @@ public class OrderDAO implements IOrderDAO {
         TypedQuery<BigDecimal> query = em.createQuery(jpql, BigDecimal.class);
         query.setParameter("startDate", startDate);
         query.setParameter("endDate", endDate);
-        Double result = query.getSingleResult().doubleValue();
-        return result != null ? result : 0.0;
+        BigDecimal result = query.getSingleResult();
+        return result != null ? result.doubleValue() : 0.0;
     }
 
     public int getTotalBuyers(String startDateStr, String endDateStr) throws ParseException {

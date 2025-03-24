@@ -103,6 +103,29 @@ public class AuthServlet extends HttpServlet {
         }
     }
 
+    protected void forgotPassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String email = request.getParameter("email");
+        String newPass = request.getParameter("newPassword");
+        String confirmPass = request.getParameter("confirmPassword");
+        boolean check = userDAO.isEmailExists(email);
+        if (!check) {
+            request.setAttribute("message", "Email không tồn tại!");
+            request.getRequestDispatcher("ligmaShop/login/forgotPassword.jsp?error=wrong_info").forward(request, response);
+        } else {
+            if (!newPass.equals(confirmPass)) {
+                request.setAttribute("message", "Mật khẩu không khớp!");
+                request.getRequestDispatcher("ligmaShop/login/forgotPassword.jsp?error=wrong_info").forward(request, response);
+            } else {
+                Users user = userDAO.checkLogin(email);
+                user.setPassword(newPass);
+                userDAO.updateUser(user);
+
+                request.setAttribute("message", "Cập nhật thành công!");
+                response.sendRedirect("ligmaShop/login/signIn.jsp?success=forgot_password");
+            }
+        }
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -128,6 +151,9 @@ public class AuthServlet extends HttpServlet {
                 break;
             case "register":
                 handleRegister(request, response);
+                break;
+            case "forgotPassword":
+                forgotPassword(request, response);
                 break;
         }
     }

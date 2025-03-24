@@ -47,7 +47,7 @@ public class ChatServlet extends HttpServlet {
         String color = extractColor(message);
         String dbData = "";
 
-        if (message.equalsIgnoreCase("hello") || message.equalsIgnoreCase("chào shop") || 
+        if (message.contains("hello") || message.equalsIgnoreCase("chào") || message.equalsIgnoreCase("hi") ||
             message.equalsIgnoreCase("shop ơi") || message.equalsIgnoreCase("shop") || message.contains("cho mình hỏi")) {
             reply = "Chào bạn! Rất vui được trò chuyện với bạn. Mình là chatbot của Ligma Shop, sẵn sàng giúp bạn với các câu hỏi về sản phẩm. Bạn khỏe không? Có gì thú vị đang xảy ra không?";
             out.print(reply);

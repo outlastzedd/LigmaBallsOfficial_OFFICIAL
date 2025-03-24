@@ -132,13 +132,6 @@ public class UserDAO implements IUserDAO
             return false; // Update failed due to an exception
         }
     }
-    public static void main(String[] args) {
-        UserDAO u=new UserDAO();
-        List<Users> use=u.selectAllUsers();
-        for(Users us:use){
-            System.out.println(us.getEmail()+", "+us.getPassword());
-        }
-    }
 
     public boolean isEmailExists(String email) {
         String jpql = "SELECT COUNT(u) FROM Users u WHERE u.email = :email";
