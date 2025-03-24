@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Ligmashop - Redirecting...</title>
-    <jsp:forward page="/products">Forwarding</jsp:forward>
+    <jsp:forward page="/products"></jsp:forward>
 </head>
 <body>
 
