@@ -21,7 +21,7 @@ import productDAO.ProductDAO;
 @WebServlet(name = "ProductServlet", urlPatterns = {"/products"})
 public class ProductServlet extends HttpServlet {
 
-    private final ProductDAO productDAO = new ProductDAO();
+    private ProductDAO productDAO = new ProductDAO();
 
     static {
         Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();

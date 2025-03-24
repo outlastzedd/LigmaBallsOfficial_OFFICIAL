@@ -11,10 +11,19 @@ import java.util.Map;
 
 public class ProductDAO implements IProductDAO {
 
+    private EntityManagerFactory emf;
     private EntityManager em;
 
     public ProductDAO() {
-        em = DBConnection.getEntityManager();
+        try {
+            emf = Persistence.createEntityManagerFactory("ligmaBallsPU");
+            System.out.println("Initialized successfully");
+            em = emf.createEntityManager();
+        } catch (Exception e) {
+            System.out.println("Failed to initialize: " + e.getMessage());
+            e.printStackTrace();
+            throw e;
+        }
     }
 
     @Override
