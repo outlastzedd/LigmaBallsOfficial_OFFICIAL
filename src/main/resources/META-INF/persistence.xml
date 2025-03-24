@@ -24,10 +24,10 @@
     <class>model.Shipping</class>
     <class>model.Orders</class>
     <properties>
-        <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://ligmashopprj.database.windows.net:1433;database=LigmaShop;user=nkmq21@ligmashopprj;password=268405Duy!;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;"/>
+        <property name="javax.persistence.jdbc.url" value="${env.DATABASE_URL}"/>
         <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
-        <property name="javax.persistence.jdbc.user" value="nkmq21@ligmashopprj"/>
-        <property name="javax.persistence.jdbc.password" value="268405Duy!"/>
+        <property name="javax.persistence.jdbc.user" value="${env.DB_USERNAME}"/>
+        <property name="javax.persistence.jdbc.password" value="${env.DB_PASSWORD}"/>
         <property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
         <property name="hibernate.hbm2ddl.auto" value="update"/>
         <property name="hibernate.show_sql" value="true"/>
