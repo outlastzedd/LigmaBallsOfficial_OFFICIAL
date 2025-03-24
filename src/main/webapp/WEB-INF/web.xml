@@ -3,14 +3,14 @@
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
    xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
    version="6.0">
-    <servlet>
-        <servlet-name>Default</servlet-name>
-        <servlet-class>controller.Default</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Default</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
+<!--    <servlet>-->
+<!--        <servlet-name>Default</servlet-name>-->
+<!--        <servlet-class>controller.Default</servlet-class>-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>Default</servlet-name>-->
+<!--        <url-pattern>/</url-pattern>-->
+<!--    </servlet-mapping>-->
     <listener>
         <description>HttpSessionAttributeListener</description>
         <listener-class>listener.CountUser</listener-class>
