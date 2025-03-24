@@ -133,6 +133,20 @@
             <artifactId>jakarta.mail</artifactId>
             <version>2.0.1</version>
         </dependency>
+
+        <!-- JSP API -->
+        <dependency>
+            <groupId>jakarta.servlet.jsp</groupId>
+            <artifactId>jakarta.servlet.jsp-api</artifactId>
+            <version>3.1.1</version>
+            <scope>provided</scope> <!-- Tomcat provides this -->
+        </dependency>
+        <!-- Tomcat Jasper for JSP compilation (needed for webapp-runner) -->
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-jasper</artifactId>
+            <version>10.1.20</version>
+        </dependency>
     </dependencies>
     
     <build>
