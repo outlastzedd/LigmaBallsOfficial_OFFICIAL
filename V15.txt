@@ -1,0 +1,12 @@
+V14:
+- them controller.UserServlet -> copy nguyên file qua
+- thay đổi userDAO.UserDAO -> copy hàm updateUser() qua
+- thay đổi user/profilePage.jsp -> copy nguyên file qua
+- thay đổi user/changePassPage.jsp -> copy nguyên file qua
+
+V15:
+- thêm filter.AuthFilter.java
+- thêm error/unauthorized.jsp -> copy nguyên file qua, sửa css
+- thay đổi header/header.jsp -> thêm <c:if></c:if> tag tại drop down list người dung
+- ghi nhớ: thêm css cho các <c:if test="${param.status}"> và div bên trong nó trong user/profilePage.jsp và user/changePassPage.jsp
+- thay đổi admin/* -> copy nguyên file qua

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal" created-in="IU-243.26053.27">
+    <data-source name="LigmaShopAzure" uuid="fcae4e07-2951-42d5-aabb-3daa04d25b09">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="AZURE" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>nkmq21@ligmashopprj</user-name>
+      <schema-mapping />
+    </data-source>
+  </component>
+</project>

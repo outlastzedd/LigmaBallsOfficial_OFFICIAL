@@ -1,0 +1,133 @@
+/* Mở rộng khung Thông Tin Người Nhận và Phương Thức Thanh Toán */
+.user-info, .payment-method {
+    text-align: center;
+    margin: 30px auto;
+    width: 100%; /* Mở rộng toàn bộ chiều ngang */
+    max-width: 1200px; /* Đặt giới hạn tối đa để không quá rộng trên màn hình lớn */
+    padding: 25px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Đổi màu chữ tiêu đề thành đỏ và tăng kích thước */
+.user-info h3, .payment-method h3 {
+    color: #ff0000;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+/* Căn chỉnh các ô input */
+.user-info .form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 80%; /* Giới hạn chiều rộng của ô input để không quá dài */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.user-info .form-group label {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #333;
+    align-self: flex-start; /* Căn trái label */
+}
+
+.user-info .form-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.user-info .form-group input:focus {
+    border-color: #ff0000;
+}
+
+/* Style cho phần Phương Thức Thanh Toán */
+.payment-method .form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Căn trái để giống hình */
+    gap: 15px;
+    width: 80%; /* Giới hạn chiều rộng của phần radio buttons */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.payment-method .payment-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.payment-method .payment-option input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.payment-method .payment-option label {
+    font-size: 16px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.payment-logo {
+    height: 24px;
+    width: auto;
+}
+
+.payment-icon {
+    font-size: 18px;
+    color: #28a745;
+    margin-left: 5px;
+}
+
+/* Style cho nút "Quay về giỏ hàng" */
+.cart__back-btn {
+    display: inline-block;
+    background: #555;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: background 0.3s;
+}
+
+.cart__back-btn:hover {
+    background: #333;
+}
+
+/* Style cho nút "Xác nhận thanh toán" */
+.cart__checkout-btn {
+    display: block;
+    width: 50%;
+    margin: 20px auto;
+    background: #28a745;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.cart__checkout-btn:hover {
+    background: #218838;
+}
