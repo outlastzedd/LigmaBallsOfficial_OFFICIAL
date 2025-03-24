@@ -18,34 +18,11 @@
     <class>model.Cartitems</class>
     <class>model.PaymentMethods</class>
     <class>model.Reviews</class>
-    <class>model.Chatmessages</class>
     <class>model.Cart</class>
-    <class>model.Chatsessions</class>
     <class>model.ProductCategories</class>
     <class>model.Productsizecolor</class>
     <class>model.Shipping</class>
     <class>model.Orders</class>
-    <class>model.resources.Sizes</class>
-    <class>model.resources.Inventory</class>
-    <class>model.resources.ProductCategories</class>
-    <class>model.resources.Categories</class>
-    <class>model.resources.PaymentMethods</class>
-    <class>model.resources.Orderdetails</class>
-    <class>model.resources.ShippingCompanies</class>
-    <class>model.resources.Orders</class>
-    <class>model.resources.Cartitems</class>
-    <class>model.resources.Users</class>
-    <class>model.resources.Company</class>
-    <class>model.resources.Reviews</class>
-    <class>model.resources.Products</class>
-    <class>model.resources.Shipping</class>
-    <class>model.resources.Voucher</class>
-    <class>model.resources.Productsizecolor</class>
-    <class>model.resources.Orderstatus</class>
-    <class>model.resources.Cart</class>
-    <class>model.resources.Productimages</class>
-    <class>model.resources.Colors</class>
-    <class>model.resources.Productviews</class>
     <properties>
         <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://ligmashopprj.database.windows.net:1433;database=LigmaShop;user=nkmq21@ligmashopprj;password=268405Duy!;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;"/>
         <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
