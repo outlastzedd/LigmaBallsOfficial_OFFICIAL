@@ -1,7 +1,6 @@
 package controller;
 
 import jakarta.servlet.RequestDispatcher;
-import io.github.cdimascio.dotenv.Dotenv;
 
 import java.io.IOException;
 
@@ -21,18 +20,6 @@ import productDAO.ProductDAO;
 public class ProductServlet extends HttpServlet {
 
     private final ProductDAO productDAO = new ProductDAO();
-
-    static {
-        Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
-        System.out.println("ProductServlet: Loaded environment variables from .env");
-        String URL = dotenv.get("JDBC_DATABASE_URL");
-        System.out.println("ProductServlet: JDBC_DATABASE_URL = " + URL);
-        if (URL != null) {
-            System.setProperty("JDBC_DATABASE_URL", dotenv.get("JDBC_DATABASE_URL"));
-        }
-        System.out.println("ProductServlet: SystemProperty JDBC_DATABASE_URL = " + System.getProperty("JDBC_DATABASE_URL"));
-        System.out.println("ProductServlet: EnvProperty JDBC_DATABASE_URL = " + System.getenv("JDBC_DATABASE_URL"));
-    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
