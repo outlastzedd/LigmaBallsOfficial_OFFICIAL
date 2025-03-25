@@ -121,8 +121,6 @@ public class ProductDAO implements IProductDAO {
         } catch (Exception e) {
             em.getTransaction().rollback();
             throw e;
-        } finally {
-            em.close();
         }
     }
 
@@ -135,8 +133,6 @@ public class ProductDAO implements IProductDAO {
         } catch (Exception e) {
             em.getTransaction().rollback();
             throw e;
-        } finally {
-            em.close();
         }
     }
     

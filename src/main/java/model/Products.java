@@ -101,6 +101,16 @@ public class Products implements Serializable
         this.createdDate = createdDate;
     }
 
+    public Products(String productName, String description, BigDecimal price, Date createdDate, Integer discount, Boolean status, Collection<Productimages> productimagesCollection) {
+        this.productName = productName;
+        this.description = description;
+        this.price = price;
+        this.createdDate = createdDate;
+        this.discount = discount;
+        this.status = status;
+        this.productimagesCollection = productimagesCollection;
+    }
+
     public Integer getProductID()
     {
         return productID;
