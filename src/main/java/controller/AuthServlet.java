@@ -2,6 +2,10 @@ package controller;
 
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
@@ -11,12 +15,17 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import model.Users;
+import model.Cart;
+import model.Cartitems;
+
 import userDAO.*;
+import cartDAO.*;
 
 @WebServlet(name = "AuthServlet", urlPatterns = {"/authservlet"})
 
 public class AuthServlet extends HttpServlet {
-    UserDAO userDAO = new UserDAO();
+    private UserDAO userDAO = new UserDAO();
+    private CartDAO cartDAO = new CartDAO();
     
     private boolean isValidEmail(String email) {
         String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
@@ -39,7 +48,22 @@ public class AuthServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("email", email);
             session.setAttribute("user", user);
-            
+
+            // Create cart for user
+            Cart cart = cartDAO.getCartByUser(user);
+            if (cart == null) {
+                cart = new Cart(new Date(), new ArrayList<>(), user);
+                cartDAO.saveCart(cart);
+            }
+            session.setAttribute("cart", cart);
+            // Set cartItems to session
+            Collection<Cartitems> cartItems = cart.getCartitemsCollection();
+            if (cartItems == null) {
+                cartItems = new ArrayList<>();
+                cart.setCartitemsCollection(cartItems);
+            }
+            session.setAttribute("cartItems", cartItems);
+
             Cookie cEmail, cPassword, cRememberMe;
             
             if (rememberMe != null && rememberMe.equals("true")) {
@@ -53,9 +77,9 @@ public class AuthServlet extends HttpServlet {
             }
             
             // chỉnh thời gian sống của cookie tại đây (đơn vị: giây)
-            cEmail.setMaxAge(60);
-            cPassword.setMaxAge(60);
-            cRememberMe.setMaxAge(60);
+            cEmail.setMaxAge(10);
+            cPassword.setMaxAge(10);
+            cRememberMe.setMaxAge(10);
             
             response.addCookie(cRememberMe);
             response.addCookie(cPassword);

@@ -74,6 +74,12 @@ public class Cart implements Serializable
         this.createdDate = createdDate;
     }
 
+    public Cart(Date createdDate, Collection<Cartitems> cartitemsCollection, Users userID) {
+        this.createdDate = createdDate;
+        this.cartitemsCollection = cartitemsCollection;
+        this.userID = userID;
+    }
+
     public Integer getCartID()
     {
         return cartID;

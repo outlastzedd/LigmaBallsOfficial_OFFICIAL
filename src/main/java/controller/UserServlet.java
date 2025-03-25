@@ -215,13 +215,12 @@ public class UserServlet extends HttpServlet {
               throws IOException {
             try {
                   int id = Integer.parseInt(request.getParameter("id"));
-
                   String name = request.getParameter("fullName");
                   String email = request.getParameter("email");
                   String phone = request.getParameter("phoneNumber");
                   String address = request.getParameter("address");
                   String role = request.getParameter("role");
-                  boolean status = (request.getParameter("status") != null) || request.getParameter("status").equals("true");
+                  boolean status = "true".equals(request.getParameter("status"));
 
                   // Lấy user từ database bằng selectUser()
                   Users existingUser;

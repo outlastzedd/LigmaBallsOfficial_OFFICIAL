@@ -2,12 +2,16 @@ package cartDAO;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.TypedQuery;
-import model.Cartitems;
-import model.Cart;
-import dao.DBConnection;
 import jakarta.persistence.NoResultException;
+import jakarta.persistence.TypedQuery;
+import model.Cart;
+import model.Cartitems;
+import model.Productsizecolor;
+import dao.DBConnection;
 import model.Users;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
 
 public class CartDAO implements ICartDao {
 
@@ -19,25 +23,27 @@ public class CartDAO implements ICartDao {
 
     @Override
     public void saveCart(Cart cart) {
+        EntityTransaction transaction = em.getTransaction();
         try {
-            em.getTransaction().begin();
+            transaction.begin();
             if (cart.getCartID() == null) {
-                em.persist(cart); // Thêm mới
+                em.persist(cart); // Insert new cart
             } else {
-                em.merge(cart); // Cập nhật
+                em.merge(cart); // Update existing cart
             }
-            em.getTransaction().commit();
+            transaction.commit();
         } catch (Exception e) {
-            em.getTransaction().rollback();
-            e.printStackTrace();
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            throw new RuntimeException("Error saving cart: " + e.getMessage(), e);
         }
     }
 
     @Override
     public Cart getCartByUser(Users user) {
-        EntityManager em = DBConnection.getEntityManager();
         try {
-            em.clear(); // Xóa first-level cache
+            em.clear(); // Clear first-level cache
             TypedQuery<Cart> query = em.createQuery(
                     "SELECT c FROM Cart c LEFT JOIN FETCH c.cartitemsCollection WHERE c.userID = :user", Cart.class);
             query.setParameter("user", user);
@@ -45,58 +51,11 @@ public class CartDAO implements ICartDao {
         } catch (NoResultException e) {
             return null;
         } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    @Override
-    public void saveCartItem(Cartitems cartItem) {
-        try {
-            em.getTransaction().begin();
-            if (cartItem.getCartItemID() == null) {
-                em.persist(cartItem); // Thêm mới
-            } else {
-                em.merge(cartItem); // Cập nhật
-            }
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void removeCartItem(int cartItemId) {
-        EntityManager em = DBConnection.getEntityManager();
-        try {
-            em.getTransaction().begin();
-            Cartitems item = em.find(Cartitems.class, cartItemId);
-            if (item == null) {
-                throw new IllegalArgumentException("Không tìm thấy mục với ID: " + cartItemId);
-            }
-
-            // Kiểm tra quyền sở hữu
-            Cart cart = item.getCartID();
-            if (cart == null) {
-                throw new IllegalStateException("Mục không thuộc về giỏ hàng nào.");
-            }
-
-            // Lấy userID từ cart để kiểm tra (cần truyền userID từ CartServlet)
-            // Vì userID không được truyền trực tiếp, chúng ta sẽ dựa vào CartServlet để kiểm tra
-            // Do đó, chúng ta sẽ bỏ kiểm tra quyền sở hữu ở đây và để CartServlet xử lý
-            em.remove(item);
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
-            throw new RuntimeException("Lỗi khi xóa Cartitems: " + e.getMessage(), e);
+            throw new RuntimeException("Error fetching cart: " + e.getMessage(), e);
         }
     }
 
     public void clearCartItems(Cart cart) {
-        EntityManager em = DBConnection.getEntityManager();
         EntityTransaction transaction = em.getTransaction();
         try {
             transaction.begin();
@@ -110,6 +69,129 @@ public class CartDAO implements ICartDao {
                 transaction.rollback();
             }
             throw new RuntimeException("Error clearing cart items: " + e.getMessage(), e);
+        }
+    }
+
+    // Moved from CartServlet.java
+    @Override
+    public void addToCart(Cart cart, int productSizeColorID, int quantity) {
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            Productsizecolor productSizeColor = em.find(Productsizecolor.class, productSizeColorID);
+            if (productSizeColor == null) {
+                throw new IllegalArgumentException("Product with ID " + productSizeColorID + " not found.");
+            }
+            if (quantity <= 0) {
+                throw new IllegalArgumentException("Quantity must be greater than 0.");
+            }
+
+            Collection<Cartitems> cartItems = cart.getCartitemsCollection();
+            if (cartItems == null) {
+                cartItems = new ArrayList<>();
+                cart.setCartitemsCollection(cartItems);
+            }
+
+            boolean itemExists = false;
+            for (Cartitems item : cartItems) {
+                if (item.getProductSizeColorID().getProductSizeColorID().equals(productSizeColorID)) {
+                    item.setQuantity(item.getQuantity() + quantity);
+                    em.merge(item);
+                    itemExists = true;
+                    break;
+                }
+            }
+
+            if (!itemExists) {
+                Cartitems cartItem = new Cartitems();
+                cartItem.setCartID(cart);
+                cartItem.setProductSizeColorID(productSizeColor);
+                cartItem.setQuantity(quantity);
+                cartItem.setAddedDate(new Date());
+                cartItems.add(cartItem);
+                em.persist(cartItem);
+            }
+
+            em.merge(cart); // Ensure cart is updated
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            throw new RuntimeException("Error adding to cart: " + e.getMessage(), e);
+        }
+    }
+
+    // Moved from CartServlet.java
+    @Override
+    public void updateCartItem(Cart cart, int cartItemId, int newQuantity) {
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            Collection<Cartitems> cartItems = cart.getCartitemsCollection();
+            if (cartItems == null || cartItems.isEmpty()) {
+                throw new IllegalStateException("Cart is empty.");
+            }
+
+            Cartitems itemToUpdate = null;
+            for (Cartitems item : cartItems) {
+                if (item.getCartItemID().equals(cartItemId)) {
+                    itemToUpdate = item;
+                    break;
+                }
+            }
+
+            if (itemToUpdate == null) {
+                throw new IllegalArgumentException("Cart item with ID " + cartItemId + " not found.");
+            }
+
+            if (newQuantity > 0) {
+                itemToUpdate.setQuantity(newQuantity);
+                em.merge(itemToUpdate);
+            } else {
+                em.remove(itemToUpdate);
+                cartItems.remove(itemToUpdate);
+            }
+
+            em.merge(cart); // Ensure cart is updated
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            throw new RuntimeException("Error updating cart item: " + e.getMessage(), e);
+        }
+    }
+
+    // Moved from CartServlet.java
+    @Override
+    public void clearCartItems(Cart cart, int cartItemId) {
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            Collection<Cartitems> cartItems = cart.getCartitemsCollection();
+            if (cartItems != null) {
+                Cartitems itemToRemove = null;
+                for (Cartitems item : cartItems) {
+                    if (item.getCartItemID().equals(cartItemId)) {
+                        itemToRemove = item;
+                        break;
+                    }
+                }
+                if (itemToRemove != null) {
+                    cartItems.remove(itemToRemove);
+                    em.remove(em.merge(itemToRemove)); // Merge then remove to ensure entity is managed
+                } else {
+                    throw new IllegalArgumentException("Cart item with ID " + cartItemId + " not found in cart.");
+                }
+            }
+            em.merge(cart); // Ensure cart is updated
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            throw new RuntimeException("Error removing cart item: " + e.getMessage(), e);
         }
     }
 }

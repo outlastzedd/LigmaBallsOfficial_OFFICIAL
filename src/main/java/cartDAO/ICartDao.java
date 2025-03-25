@@ -13,7 +13,12 @@ public interface ICartDao {
 
       Cart getCartByUser(Users user);
 
-      void saveCartItem(Cartitems cartItem);
+      // Moved from CartServlet.java
+      void addToCart(Cart cart, int productSizeColorID, int quantity);
 
-      void removeCartItem(int cartItemId);
+      // Moved from CartServlet.java
+      void updateCartItem(Cart cart, int cartItemId, int newQuantity);
+
+      // Moved from CartServlet.java
+      void clearCartItems(Cart cart, int cartItemId);
 }
