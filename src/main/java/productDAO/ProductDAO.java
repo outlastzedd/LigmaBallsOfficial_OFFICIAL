@@ -1,6 +1,8 @@
 package productDAO;
 
 import dao.DBConnection;
+
+import java.io.IOException;
 import java.util.List;
 import model.*;
 import jakarta.persistence.*;
@@ -46,7 +48,7 @@ public class ProductDAO implements IProductDAO {
         return query.getResultList();
     }
 
-    public List<Products> selectAllProductsActive() throws NoResultException {
+    public List<Products> selectAllProductsActive() throws NoResultException, IOException {
         TypedQuery<Products> query = em.createNamedQuery("Products.selectAllActive", Products.class);
         return query.getResultList();
     }
