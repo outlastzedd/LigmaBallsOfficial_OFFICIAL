@@ -78,7 +78,14 @@ public class CartDAO implements ICartDao {
         EntityTransaction transaction = em.getTransaction();
         try {
             transaction.begin();
-            Productsizecolor productSizeColor = em.find(Productsizecolor.class, productSizeColorID);
+            // Fetch Productsizecolor with Products and productimagesCollection
+            TypedQuery<Productsizecolor> query = em.createQuery(
+                    "SELECT psc FROM Productsizecolor psc JOIN FETCH psc.productID p LEFT JOIN FETCH p.productimagesCollection WHERE psc.productSizeColorID = :id",
+                    Productsizecolor.class
+            );
+            query.setParameter("id", productSizeColorID);
+            Productsizecolor productSizeColor = query.getSingleResult();
+
             if (productSizeColor == null) {
                 throw new IllegalArgumentException("Product with ID " + productSizeColorID + " not found.");
             }
