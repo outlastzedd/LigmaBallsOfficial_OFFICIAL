@@ -207,9 +207,9 @@ public class ProductDAO implements IProductDAO {
                 .getSingleResult();
     }
 
-    public BigDecimal getDiscountByProductSizeColorID(int productSizeColorID) {
+    public Integer getDiscountByProductSizeColorID(int productSizeColorID) {
         // Truy vấn để lấy giảm giá
-        return em.createQuery("SELECT p.discount FROM Products p JOIN p.productsizecolorCollection psc WHERE psc.productSizeColorID = :id", BigDecimal.class)
+        return em.createQuery("SELECT p.discount FROM Products p JOIN p.productsizecolorCollection psc WHERE psc.productSizeColorID = :id", Integer.class)
                 .setParameter("id", productSizeColorID)
                 .getSingleResult();
     }

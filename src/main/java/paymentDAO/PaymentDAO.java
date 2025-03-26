@@ -56,8 +56,8 @@ public class PaymentDAO implements IPaymentDAO {
                         detail.setProductSizeColorID(item.getProductSizeColorID());
                         detail.setQuantity(item.getQuantity());
                         BigDecimal productPrice = productDAO.getPriceByProductSizeColorID(item.getProductSizeColorID().getProductSizeColorID());
-                        BigDecimal discount = productDAO.getDiscountByProductSizeColorID(item.getProductSizeColorID().getProductSizeColorID());
-                        BigDecimal finalPrice = productPrice.subtract(productPrice.multiply(discount.divide(BigDecimal.valueOf(100))));
+                        Integer discount = productDAO.getDiscountByProductSizeColorID(item.getProductSizeColorID().getProductSizeColorID());
+                        BigDecimal finalPrice = productPrice.subtract(productPrice.multiply(BigDecimal.valueOf(discount / 100)));
                         detail.setPrice(finalPrice);
                         em.persist(detail);
                         System.out.println("Saved Orderdetail for ProductSizeColorID: " + item.getProductSizeColorID().getProductSizeColorID());
