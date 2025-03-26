@@ -58,7 +58,7 @@ public class Products implements Serializable {
     private Collection<Reviews> reviewsCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productID")
     private Collection<Productsizecolor> productsizecolorCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productID")
     private Collection<Productimages> productimagesCollection;
     @OneToMany(mappedBy = "productID")
     private Collection<Productviews> productviewsCollection;
