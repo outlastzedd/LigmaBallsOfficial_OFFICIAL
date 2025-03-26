@@ -13,7 +13,7 @@ public class Iconstant {
 
     public static final String GOOGLE_CLIENT_SECRET = "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";
 
-    public static final String GOOGLE_REDIRECT_URI = "http://localhost:8080/LigmaBallsOfficial/logingg";
+    public static final String GOOGLE_REDIRECT_URI = "https://ligma-shop-49f1782b6042.herokuapp.com/logingg";
 
     public static final String GOOGLE_GRANT_TYPE = "authorization_code";
 
