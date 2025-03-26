@@ -239,7 +239,8 @@
                                                                   type="number" pattern="#,##0"
                                                                   groupingUsed="true"/> đ
                                             </td>
-                                            <td><fmt:formatNumber value="${requestScope.buyNowTotalAmount}" type="number"
+                                            <td><fmt:formatNumber value="${requestScope.buyNowTotalAmount}"
+                                                                  type="number"
                                                                   pattern="#,##0" groupingUsed="true"/> đ
                                             </td>
                                         </tr>
@@ -307,10 +308,12 @@
                             </table>
 
                             <!-- Định dạng totalPrice -->
-                            <fmt:formatNumber var="displayTotalPrice" value="${requestScope.buyNowTotalAmount == null ? requestScope.totalAmount : requestScope.buyNowTotalAmount}" type="number"
+                            <fmt:formatNumber var="displayTotalPrice"
+                                              value="${requestScope.buyNowTotalAmount == null ? totalPrice : requestScope.buyNowTotalAmount}"
+                                              type="number"
                                               pattern="#,##0"
                                               groupingUsed="true"/>
-                            <fmt:formatNumber var="rawTotalPrice" value="${requestScope.totalAmount}" type="number"
+                            <fmt:formatNumber var="rawTotalPrice" value="${requestScope.buyNowTotalAmount == null ? totalPrice : requestScope.buyNowTotalAmount}" type="number"
                                               groupingUsed="false" maxFractionDigits="0"/>
 
                             <!-- Hidden inputs -->
