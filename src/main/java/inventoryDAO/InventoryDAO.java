@@ -37,12 +37,4 @@ public class InventoryDAO implements IInventoryDAO {
         }
         return stockMap;
     }
-
-    public static void main(String[] args) {
-        InventoryDAO i = new InventoryDAO();
-        List<ProductStockInfo> stockInfo = i.getProductStockInfo();
-        for (ProductStockInfo info : stockInfo) {
-            System.out.println("PSC ID: " + info.getProductSizeColorID() + "Stock: " + info.getStock());
-        }
-    }
 }
