@@ -46,7 +46,9 @@
                                     <li class="category-item">
                                         <a href="${pageContext.request.contextPath}/ligmaShop/user/changePassPage.jsp" class="category-item__link">Đổi Mật Khẩu</a>
                                     </li>
-
+                                    <li class="category-item">
+                                        <a href="${pageContext.request.contextPath}/orderDetails" class="category-item__link">Lịch Sử Giao Dịch</a>
+                                    </li>
                                 </ul>
                             </nav>
                         </div>

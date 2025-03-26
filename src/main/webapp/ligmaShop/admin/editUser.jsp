@@ -98,6 +98,7 @@
                                 <ul class="nav flex-column sub-menu">
                                     <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/ligmaShop/product/addNewProduct.jsp">Thêm Sản Phẩm</a></li>
                                     <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/productManager">Danh sách sản phẩm</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/orderManagement"> Quản Lý Đơn Hàng </a></li>  
                                 </ul>
                             </div>
 
@@ -162,6 +163,7 @@
                                                     <label for="address">Địa chỉ</label>
                                                     <input type="text" id="address" name="address" value="<%= user.getAddress()%>" >
                                                 </div>
+
                                                 <div class="form-group-edit">
                                                     <label for="role">Vai Trò</label>
                                                     <select id="role" name="role">
@@ -169,19 +171,18 @@
                                                         <option value="admin" <%= "admin".equals(user.getRole()) ? "selected" : "" %>>Admin</option>
                                                     </select>
                                                 </div>
+
                                                 <div class="form-group-edit2">
                                                     <label for="status">Trạng Thái</label>
                                                     <input type="checkbox" id="status" name="status" value="true" <%= user.getStatus() ? "checked" : "" %>> Kích Hoạt
                                                 </div>
-                                                <div class="form-group-edit">
-                                                    <label for="password">Địa chỉ</label>
-                                                    <input type="text" id="password" name="password" value="<%= user.getPassword()%>" >
-                                                </div>
+
+
+
                                                 <div class="form-group-edit">
                                                     <button type="submit">Cập Nhật Người Dùng</button>
                                                 </div>
                                             </form>
-
                                             <% } else { %>
                                             <p class="error">Không tìm thấy người dùng để chỉnh sửa.</p>
                                             <% } %>

@@ -333,7 +333,7 @@ public class VNPayReturnServlet extends HttpServlet {
             Cart cart = (Cart) session.getAttribute("cart");
             if (cart != null) {
                 BigDecimal totalAmount = new BigDecimal(amount);
-                paymentDAO.processPayment(pendingTransaction, transactionId, totalAmount, cart);
+                paymentDAO.processPayment(pendingTransaction, transactionId, totalAmount, cart, 1);
                 session.removeAttribute("cart");
                 session.removeAttribute("cartItems");
             } else {
@@ -383,7 +383,7 @@ public class VNPayReturnServlet extends HttpServlet {
                 Cart cart = (Cart) session.getAttribute("cart");
                 if (cart != null) {
                     BigDecimal totalAmount = new BigDecimal(amount);
-                    paymentDAO.processPayment(pendingTransaction, transactionId, totalAmount, cart);
+                    paymentDAO.processPayment(pendingTransaction, transactionId, totalAmount, cart, 2);
                     session.removeAttribute("cart");
                     session.removeAttribute("cartItems");
                 } else {

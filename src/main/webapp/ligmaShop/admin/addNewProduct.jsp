@@ -31,7 +31,7 @@
                         </button>
                     </div>
                     <div>
-                        <a class="navbar-brand brand-logo" href="${pageContext.request.contextPath}/ligmaShop/admin/adminPage.jsp">
+                        <a class="navbar-brand brand-logo" href="${pageContext.request.contextPath}/test">
                             <img src="${pageContext.request.contextPath}/resource/images/LIGMA SHOP WHITE ON BLACK.png" alt="logo" />
                         </a>
                         <a class="navbar-brand brand-logo-mini" href="${pageContext.request.contextPath}/ligmaShop/admin/adminPage.jsp">
@@ -70,8 +70,8 @@
                             </a>
                         </li>
                         <li class="nav-item nav-category">Công Cụ</li>
-                        
-                        
+
+
                         <li class="nav-item">
                             <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
                                 <i class="menu-icon mdi mdi-account-circle-outline"></i>
@@ -80,7 +80,7 @@
                             </a>
                             <div class="collapse" id="auth">
                                 <ul class="nav flex-column sub-menu">
-
+                                    <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/ligmaShop/admin/managerUser.jsp">Quản lý Người Dùng</a></li>
                                     <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/ligmaShop/admin/addUser.jsp">Thêm người dùng mới</a></li>
 
                                 </ul>
@@ -95,8 +95,10 @@
                             </a>
                             <div class="collapse" id="form-elements">
                                 <ul class="nav flex-column sub-menu">
-                                   
+
                                     <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/productManager">Danh sách sản phẩm</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/orderManagement"> Quản Lý Đơn Hàng </a></li>  
+
                                 </ul>
                             </div>
 

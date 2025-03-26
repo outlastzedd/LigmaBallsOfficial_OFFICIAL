@@ -6,5 +6,5 @@ import java.util.Map;
 import model.Cart;
 
 public interface IPaymentDAO {
- public void processPayment(Map<String, String> pendingTransaction, String transactionId, BigDecimal totalAmount, Cart cart);    
+    void processPayment(Map<String, String> pendingTransaction, String transactionId, BigDecimal totalAmount, Cart cart, int paymentMethodID);
 }

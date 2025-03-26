@@ -209,11 +209,14 @@
                             <div class="collapse" id="form-elements">
                                 <ul class="nav flex-column sub-menu">
                                     <li class="nav-item"><a class="nav-link"
-                                                            href="${pageContext.request.contextPath}/productManager"> Xem Trang
-                                            Sản Phẩm </a></li>
-                                    <li class="nav-item"><a class="nav-link"
                                                             href="${pageContext.request.contextPath}/ligmaShop/admin/addNewProduct.jsp">Thêm
                                             Sản Phẩm</a></li>
+                                    <li class="nav-item"><a class="nav-link"
+                                                            href="${pageContext.request.contextPath}/productManager"> Danh Sách
+                                            Sản Phẩm </a></li>
+                                    <li class="nav-item"><a class="nav-link"
+                                                            href="${pageContext.request.contextPath}/orderManagement"> Quản Lý Đơn Hàng </a></li>        
+
                                 </ul>
 
                             </div>

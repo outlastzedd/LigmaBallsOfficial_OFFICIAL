@@ -29,7 +29,7 @@ public class PaymentDAO implements IPaymentDAO {
     }
 
     @Override
-    public void processPayment(Map<String, String> pendingTransaction, String transactionId, BigDecimal totalAmount, Cart cart) {
+    public void processPayment(Map<String, String> pendingTransaction, String transactionId, BigDecimal totalAmount, Cart cart, int paymentMethodID) {
         EntityTransaction transaction = em.getTransaction();
         try {
             transaction.begin();
@@ -39,7 +39,7 @@ public class PaymentDAO implements IPaymentDAO {
             order.setTotalAmount(totalAmount);
             Users user = em.find(Users.class, getUserIdFromPendingTransaction(pendingTransaction));
             order.setUserID(user);
-            PaymentMethods paymentMethod = em.find(PaymentMethods.class, 2);
+            PaymentMethods paymentMethod = em.find(PaymentMethods.class, paymentMethodID);
             order.setPaymentMethodID(paymentMethod);
             em.persist(order);
 
@@ -55,8 +55,10 @@ public class PaymentDAO implements IPaymentDAO {
                         detail.setOrderID(order);
                         detail.setProductSizeColorID(item.getProductSizeColorID());
                         detail.setQuantity(item.getQuantity());
-                        // Nếu có Price trong Orderdetails, thêm vào đây
-                        // detail.setPrice(item.getPrice());
+                        BigDecimal productPrice = productDAO.getPriceByProductSizeColorID(item.getProductSizeColorID().getProductSizeColorID());
+                        BigDecimal discount = productDAO.getDiscountByProductSizeColorID(item.getProductSizeColorID().getProductSizeColorID());
+                        BigDecimal finalPrice = productPrice.subtract(productPrice.multiply(discount.divide(BigDecimal.valueOf(100))));
+                        detail.setPrice(finalPrice);
                         em.persist(detail);
                         System.out.println("Saved Orderdetail for ProductSizeColorID: " + item.getProductSizeColorID().getProductSizeColorID());
                     }

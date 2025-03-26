@@ -1,0 +1,40 @@
+
+            .tab-content {
+                margin-top: 20px;
+            }
+            .table {
+                width: 100%;
+                margin-bottom: 1rem;
+                color: #212529;
+                
+            }
+            .table th, .table td {
+                padding: 0.75rem;
+                vertical-align: top;
+                border-top: 1px solid #dee2e6;
+                
+            }
+            .table thead th {
+                vertical-align: bottom;
+                border-bottom: 2px solid #dee2e6;
+            }
+            .search-form {
+                margin-bottom: 20px;
+            }
+            .back-btn-order {
+                padding: 8px 15px;
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                margin-left: 10px;
+                vertical-align: middle;
+            }
+            .back-btn-order:hover {
+                background-color: #0056b3;
+            }
+            .nav-tabs {
+                display: flex;
+                align-items: center;
+            }

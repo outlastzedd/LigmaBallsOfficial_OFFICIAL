@@ -5,6 +5,10 @@
 package orderDAO;
 
 import jakarta.persistence.NoResultException;
+import model.Orderdetails;
+import model.Orders;
+
+import java.util.List;
 
 /**
  *
@@ -14,4 +18,17 @@ public interface IOrderDAO {
     
     public int countUser() throws NoResultException;
 
+    List<Orderdetails> getAllOrderDetails();
+
+    List<Orderdetails> getOrderDetailsByUserId(int userID);
+
+    List<Orders> getAllOrders();
+
+    List<Orders> getOrdersByPaymentMethod(int paymentMethodID);
+
+    List<Orders> searchOrdersById(int searchId);
+
+    List<Orders> searchOrdersByName(String name);
+
+    Orders getOrderDetailsById(int orderId);
 }
