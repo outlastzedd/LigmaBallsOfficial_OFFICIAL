@@ -10,17 +10,17 @@ public class EnvConfigListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         // Load from Heroku env first
-        String url = System.getenv("JDBC_DATABASE_URL");
+        String url = System.getenv("DATABASE_URL");
         if (url == null) {
             // Fallback to .env for local dev
             Dotenv dotenv = Dotenv.configure().directory("./").ignoreIfMissing().load();
-            url = dotenv.get("JDBC_DATABASE_URL");
+            url = dotenv.get("DATABASE_URL");
         }
         if (url != null) {
-            System.setProperty("JDBC_DATABASE_URL", url);
+            System.setProperty("DATABASE_URL", url);
         }
-        System.out.println("EnvConfigListener: JDBC_DATABASE_URL from env = " + System.getenv("JDBC_DATABASE_URL"));
-        System.out.println("EnvConfigListener: JDBC_DATABASE_URL from prop = " + System.getProperty("JDBC_DATABASE_URL"));
+        System.out.println("EnvConfigListener: JDBC_DATABASE_URL from env = " + System.getenv("DATABASE_URL"));
+        System.out.println("EnvConfigListener: JDBC_DATABASE_URL from prop = " + System.getProperty("DATABASE_URL"));
     }
 
     @Override
