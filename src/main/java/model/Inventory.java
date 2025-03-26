@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
 import jakarta.persistence.Basic;
@@ -22,123 +18,99 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- *
- * @author Asus-FPT
- */
 @Entity
-@Table(name = "INVENTORY")
+@Table(name = "inventory") // Lowercase
 @XmlRootElement
-@NamedQueries(
-{
-    @NamedQuery(name = "Inventory.findAll", query = "SELECT i FROM Inventory i"),
-    @NamedQuery(name = "Inventory.findByInventoryID", query = "SELECT i FROM Inventory i WHERE i.inventoryID = :inventoryID"),
-    @NamedQuery(name = "Inventory.findByStock", query = "SELECT i FROM Inventory i WHERE i.stock = :stock"),
-    @NamedQuery(name = "Inventory.findByLastUpdated", query = "SELECT i FROM Inventory i WHERE i.lastUpdated = :lastUpdated")
+@NamedQueries({
+        @NamedQuery(name = "Inventory.findAll", query = "SELECT i FROM Inventory i"),
+        @NamedQuery(name = "Inventory.findByInventoryID", query = "SELECT i FROM Inventory i WHERE i.inventoryID = :inventoryID"),
+        @NamedQuery(name = "Inventory.findByStock", query = "SELECT i FROM Inventory i WHERE i.stock = :stock"),
+        @NamedQuery(name = "Inventory.findByLastUpdated", query = "SELECT i FROM Inventory i WHERE i.lastUpdated = :lastUpdated")
 })
-public class Inventory implements Serializable
-{
+public class Inventory implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "InventoryID")
+    @Column(name = "inventoryid") // Lowercase
     private Integer inventoryID;
-    @Column(name = "Stock")
+    @Column(name = "stock") // Lowercase
     private Integer stock;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "LastUpdated")
+    @Column(name = "lastupdated") // Lowercase
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUpdated;
-    @JoinColumn(name = "ProductSizeColorID", referencedColumnName = "ProductSizeColorID")
+    @JoinColumn(name = "productsizecolorid", referencedColumnName = "productsizecolorid") // Lowercase
     @ManyToOne
     private Productsizecolor productSizeColorID;
 
-    public Inventory()
-    {
+    public Inventory() {
     }
 
-    public Inventory(Integer inventoryID)
-    {
+    public Inventory(Integer inventoryID) {
         this.inventoryID = inventoryID;
     }
 
-    public Inventory(Integer inventoryID, Date lastUpdated)
-    {
+    public Inventory(Integer inventoryID, Date lastUpdated) {
         this.inventoryID = inventoryID;
         this.lastUpdated = lastUpdated;
     }
 
-    public Integer getInventoryID()
-    {
+    public Integer getInventoryID() {
         return inventoryID;
     }
 
-    public void setInventoryID(Integer inventoryID)
-    {
+    public void setInventoryID(Integer inventoryID) {
         this.inventoryID = inventoryID;
     }
 
-    public Integer getStock()
-    {
+    public Integer getStock() {
         return stock;
     }
 
-    public void setStock(Integer stock)
-    {
+    public void setStock(Integer stock) {
         this.stock = stock;
     }
 
-    public Date getLastUpdated()
-    {
+    public Date getLastUpdated() {
         return lastUpdated;
     }
 
-    public void setLastUpdated(Date lastUpdated)
-    {
+    public void setLastUpdated(Date lastUpdated) {
         this.lastUpdated = lastUpdated;
     }
 
-    public Productsizecolor getProductSizeColorID()
-    {
+    public Productsizecolor getProductSizeColorID() {
         return productSizeColorID;
     }
 
-    public void setProductSizeColorID(Productsizecolor productSizeColorID)
-    {
+    public void setProductSizeColorID(Productsizecolor productSizeColorID) {
         this.productSizeColorID = productSizeColorID;
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int hash = 0;
         hash += (inventoryID != null ? inventoryID.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object)
-    {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Inventory))
-        {
+    public boolean equals(Object object) {
+        if (!(object instanceof Inventory)) {
             return false;
         }
         Inventory other = (Inventory) object;
-        if ((this.inventoryID == null && other.inventoryID != null) || (this.inventoryID != null && !this.inventoryID.equals(other.inventoryID)))
-        {
+        if ((this.inventoryID == null && other.inventoryID != null) || (this.inventoryID != null && !this.inventoryID.equals(other.inventoryID))) {
             return false;
         }
         return true;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "model.resources.Inventory[ inventoryID=" + inventoryID + " ]";
     }
-    
 }

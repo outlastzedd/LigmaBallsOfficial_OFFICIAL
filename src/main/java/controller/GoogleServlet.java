@@ -41,16 +41,12 @@ public class GoogleServlet extends HttpServlet {
                 String accessToken = gg.getToken(code);
                 GoogleAccount acc = gg.getUserInfo(accessToken);
                 if (acc != null) {
-                    //1 line to store user infor in session
-                    //redirect to homepage
                     Users user = userDAO.checkLogin(acc.getEmail());
                     if (user != null) {
                         session.setAttribute("user", user);
                         request.getRequestDispatcher("/test").forward(request, response);
                     } else {
-                        // checkRegister(name, email, phone, password);
                         userDAO.checkRegister(acc.getName(), acc.getEmail(), "", "abc@123");
-                        // request.setAttribute("registered", "Registered successfully!");
                         session.setAttribute("user", user);
                         request.getRequestDispatcher("/test").forward(request, response);
                     }

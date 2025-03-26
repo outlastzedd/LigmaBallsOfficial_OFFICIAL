@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="43ad813d-b666-4f76-b3a3-c49b7d7b01a1" name="ligma-shop Mapping">
+      <data-sources db="3b9e2e94-49ad-4606-a4d3-7254944d21a4" ddl="6818316e-dae2-4e19-87f8-6743ff37d56e" />
+      <scope>
+        <node negative="1">
+          <node kind="database" negative="1">
+            <node kind="schema" negative="1" />
+          </node>
+          <node kind="database">
+            <name qname="@" />
+            <name qname="d6ari08beb2kvb" />
+          </node>
+        </node>
+      </scope>
+    </mapping>
+  </component>
+  <component name="SqlDataSourceStorage">
+    <option name="dataSources">
+      <list>
+        <State>
+          <option name="id" value="6818316e-dae2-4e19-87f8-6743ff37d56e" />
+          <option name="name" value="ligma-shop (DDL)" />
+          <option name="dbmsName" value="POSTGRES" />
+          <option name="parent" value="3b9e2e94-49ad-4606-a4d3-7254944d21a4" />
+          <option name="urls">
+            <array />
+          </option>
+          <option name="outLayout" value="File per object by schema.groovy" />
+        </State>
+      </list>
+    </option>
+  </component>
+</project>

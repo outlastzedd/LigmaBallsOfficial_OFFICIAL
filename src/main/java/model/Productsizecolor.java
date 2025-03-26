@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
 import jakarta.persistence.Basic;
@@ -23,38 +19,32 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
 
-/**
- *
- * @author Asus-FPT
- */
 @Entity
-@Table(name = "PRODUCTSIZECOLOR")
+@Table(name = "productsizecolor") // Lowercase
 @XmlRootElement
-@NamedQueries(
-{
-    @NamedQuery(name = "Productsizecolor.findAll", query = "SELECT p FROM Productsizecolor p"),
-    @NamedQuery(name = "Productsizecolor.findByProductSizeColorID", query = "SELECT p FROM Productsizecolor p WHERE p.productSizeColorID = :productSizeColorID"),
-    @NamedQuery(name = "Productsizecolor.findByPrice", query = "SELECT p FROM Productsizecolor p WHERE p.price = :price")
+@NamedQueries({
+        @NamedQuery(name = "Productsizecolor.findAll", query = "SELECT p FROM Productsizecolor p"),
+        @NamedQuery(name = "Productsizecolor.findByPrice", query = "SELECT p FROM Productsizecolor p WHERE p.price = :price"),
+        @NamedQuery(name = "Productsizecolor.getSize", query = "SELECT DISTINCT s.sizeName FROM Productsizecolor psc JOIN psc.productID p JOIN psc.sizeID s WHERE p.productName LIKE :name AND p.status = TRUE"),
+        @NamedQuery(name = "Productsizecolor.getColors", query = "SELECT DISTINCT c.colorName FROM Productsizecolor psc JOIN psc.productID p JOIN psc.colorID c WHERE p.productName LIKE :name AND p.status = TRUE"),
 })
-public class Productsizecolor implements Serializable
-{
+public class Productsizecolor implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "ProductSizeColorID")
+    @Column(name = "productsizecolorid") // Lowercase
     private Integer productSizeColorID;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "Price")
+    @Column(name = "price") // Lowercase
     private BigDecimal price;
-    @JoinColumn(name = "ColorID", referencedColumnName = "ColorID")
+    @JoinColumn(name = "colorid", referencedColumnName = "colorid") // Lowercase
     @ManyToOne(optional = false)
     private Colors colorID;
-    @JoinColumn(name = "ProductID", referencedColumnName = "ProductID")
+    @JoinColumn(name = "productid", referencedColumnName = "productid") // Lowercase
     @ManyToOne(optional = false)
     private Products productID;
-    @JoinColumn(name = "SizeID", referencedColumnName = "SizeID")
+    @JoinColumn(name = "sizeid", referencedColumnName = "sizeid") // Lowercase
     @ManyToOne(optional = false)
     private Sizes sizeID;
     @OneToMany(mappedBy = "productSizeColorID")
@@ -64,126 +54,101 @@ public class Productsizecolor implements Serializable
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productSizeColorID")
     private Collection<Orderdetails> orderdetailsCollection;
 
-    public Productsizecolor()
-    {
+    public Productsizecolor() {
     }
 
-    public Productsizecolor(Integer productSizeColorID)
-    {
+    public Productsizecolor(Integer productSizeColorID) {
         this.productSizeColorID = productSizeColorID;
     }
 
-    public Integer getProductSizeColorID()
-    {
+    public Integer getProductSizeColorID() {
         return productSizeColorID;
     }
 
-    public void setProductSizeColorID(Integer productSizeColorID)
-    {
+    public void setProductSizeColorID(Integer productSizeColorID) {
         this.productSizeColorID = productSizeColorID;
     }
 
-    public BigDecimal getPrice()
-    {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price)
-    {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
-    public Colors getColorID()
-    {
+    public Colors getColorID() {
         return colorID;
     }
 
-    public void setColorID(Colors colorID)
-    {
+    public void setColorID(Colors colorID) {
         this.colorID = colorID;
     }
 
-    public Products getProductID()
-    {
+    public Products getProductID() {
         return productID;
     }
 
-    public void setProductID(Products productID)
-    {
+    public void setProductID(Products productID) {
         this.productID = productID;
     }
 
-    public Sizes getSizeID()
-    {
+    public Sizes getSizeID() {
         return sizeID;
     }
 
-    public void setSizeID(Sizes sizeID)
-    {
+    public void setSizeID(Sizes sizeID) {
         this.sizeID = sizeID;
     }
 
     @XmlTransient
-    public Collection<Inventory> getInventoryCollection()
-    {
+    public Collection<Inventory> getInventoryCollection() {
         return inventoryCollection;
     }
 
-    public void setInventoryCollection(Collection<Inventory> inventoryCollection)
-    {
+    public void setInventoryCollection(Collection<Inventory> inventoryCollection) {
         this.inventoryCollection = inventoryCollection;
     }
 
     @XmlTransient
-    public Collection<Cartitems> getCartitemsCollection()
-    {
+    public Collection<Cartitems> getCartitemsCollection() {
         return cartitemsCollection;
     }
 
-    public void setCartitemsCollection(Collection<Cartitems> cartitemsCollection)
-    {
+    public void setCartitemsCollection(Collection<Cartitems> cartitemsCollection) {
         this.cartitemsCollection = cartitemsCollection;
     }
 
     @XmlTransient
-    public Collection<Orderdetails> getOrderdetailsCollection()
-    {
+    public Collection<Orderdetails> getOrderdetailsCollection() {
         return orderdetailsCollection;
     }
 
-    public void setOrderdetailsCollection(Collection<Orderdetails> orderdetailsCollection)
-    {
+    public void setOrderdetailsCollection(Collection<Orderdetails> orderdetailsCollection) {
         this.orderdetailsCollection = orderdetailsCollection;
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int hash = 0;
         hash += (productSizeColorID != null ? productSizeColorID.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object)
-    {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Productsizecolor))
-        {
+    public boolean equals(Object object) {
+        if (!(object instanceof Productsizecolor)) {
             return false;
         }
         Productsizecolor other = (Productsizecolor) object;
-        if ((this.productSizeColorID == null && other.productSizeColorID != null) || (this.productSizeColorID != null && !this.productSizeColorID.equals(other.productSizeColorID)))
-        {
+        if ((this.productSizeColorID == null && other.productSizeColorID != null) || (this.productSizeColorID != null && !this.productSizeColorID.equals(other.productSizeColorID))) {
             return false;
         }
         return true;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "model.resources.Productsizecolor[ productSizeColorID=" + productSizeColorID + " ]";
     }
-    
 }

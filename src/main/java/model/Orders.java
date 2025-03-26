@@ -25,36 +25,33 @@ import java.util.Collection;
 import java.util.Date;
 
 @Entity
-@Table(name = "ORDERS")
+@Table(name = "orders") // Lowercase
 @XmlRootElement
-@NamedQueries(
-{
-    @NamedQuery(name = "Orders.findAll", query = "SELECT o FROM Orders o"),
-    @NamedQuery(name = "Orders.findByOrderID", query = "SELECT o FROM Orders o WHERE o.orderID = :orderID"),
-    @NamedQuery(name = "Orders.findByOrderDate", query = "SELECT o FROM Orders o WHERE o.orderDate = :orderDate"),
-    @NamedQuery(name = "Orders.findByTotalAmount", query = "SELECT o FROM Orders o WHERE o.totalAmount = :totalAmount"),
-    @NamedQuery(name = "Orders.countUsers",query = "SELECT COUNT(DISTINCT o.userID) FROM Orders o")
+@NamedQueries({
+        @NamedQuery(name = "Orders.findAll", query = "SELECT o FROM Orders o"),
+        @NamedQuery(name = "Orders.findByOrderID", query = "SELECT o FROM Orders o WHERE o.orderID = :orderID"),
+        @NamedQuery(name = "Orders.findByOrderDate", query = "SELECT o FROM Orders o WHERE o.orderDate = :orderDate"),
+        @NamedQuery(name = "Orders.findByTotalAmount", query = "SELECT o FROM Orders o WHERE o.totalAmount = :totalAmount"),
+        @NamedQuery(name = "Orders.countUsers", query = "SELECT COUNT(DISTINCT o.userID) FROM Orders o")
 })
-public class Orders implements Serializable
-{
+public class Orders implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "OrderID")
+    @Column(name = "orderid") // Lowercase
     private Integer orderID;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "OrderDate")
+    @Column(name = "orderdate") // Lowercase
     @Temporal(TemporalType.DATE)
     private Date orderDate;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "TotalAmount")
+    @Column(name = "totalamount") // Lowercase
     private BigDecimal totalAmount;
-    @JoinColumn(name = "PaymentMethodID", referencedColumnName = "PaymentMethodID")
+    @JoinColumn(name = "paymentmethodid", referencedColumnName = "paymentmethodid") // Lowercase
     @ManyToOne
     private PaymentMethods paymentMethodID;
-    @JoinColumn(name = "UserID", referencedColumnName = "UserID")
+    @JoinColumn(name = "userid", referencedColumnName = "userid") // Lowercase
     @ManyToOne(optional = false)
     private Users userID;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "orders")
@@ -64,130 +61,105 @@ public class Orders implements Serializable
     @OneToMany(mappedBy = "orderID")
     private Collection<Shipping> shippingCollection;
 
-    public Orders()
-    {
+    public Orders() {
     }
 
-    public Orders(Integer orderID)
-    {
+    public Orders(Integer orderID) {
         this.orderID = orderID;
     }
 
-    public Orders(Integer orderID, Date orderDate)
-    {
+    public Orders(Integer orderID, Date orderDate) {
         this.orderID = orderID;
         this.orderDate = orderDate;
     }
 
-    public Integer getOrderID()
-    {
+    public Integer getOrderID() {
         return orderID;
     }
 
-    public void setOrderID(Integer orderID)
-    {
+    public void setOrderID(Integer orderID) {
         this.orderID = orderID;
     }
 
-    public Date getOrderDate()
-    {
+    public Date getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(Date orderDate)
-    {
+    public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
     }
 
-    public BigDecimal getTotalAmount()
-    {
+    public BigDecimal getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(BigDecimal totalAmount)
-    {
+    public void setTotalAmount(BigDecimal totalAmount) {
         this.totalAmount = totalAmount;
     }
 
-    public PaymentMethods getPaymentMethodID()
-    {
+    public PaymentMethods getPaymentMethodID() {
         return paymentMethodID;
     }
 
-    public void setPaymentMethodID(PaymentMethods paymentMethodID)
-    {
+    public void setPaymentMethodID(PaymentMethods paymentMethodID) {
         this.paymentMethodID = paymentMethodID;
     }
 
-    public Users getUserID()
-    {
+    public Users getUserID() {
         return userID;
     }
 
-    public void setUserID(Users userID)
-    {
+    public void setUserID(Users userID) {
         this.userID = userID;
     }
 
-    public Orderstatus getOrderstatus()
-    {
+    public Orderstatus getOrderstatus() {
         return orderstatus;
     }
 
-    public void setOrderstatus(Orderstatus orderstatus)
-    {
+    public void setOrderstatus(Orderstatus orderstatus) {
         this.orderstatus = orderstatus;
     }
 
     @XmlTransient
-    public Collection<Orderdetails> getOrderdetailsCollection()
-    {
+    public Collection<Orderdetails> getOrderdetailsCollection() {
         return orderdetailsCollection;
     }
 
-    public void setOrderdetailsCollection(Collection<Orderdetails> orderdetailsCollection)
-    {
+    public void setOrderdetailsCollection(Collection<Orderdetails> orderdetailsCollection) {
         this.orderdetailsCollection = orderdetailsCollection;
     }
 
     @XmlTransient
-    public Collection<Shipping> getShippingCollection()
-    {
+    public Collection<Shipping> getShippingCollection() {
         return shippingCollection;
     }
 
-    public void setShippingCollection(Collection<Shipping> shippingCollection)
-    {
+    public void setShippingCollection(Collection<Shipping> shippingCollection) {
         this.shippingCollection = shippingCollection;
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int hash = 0;
         hash += (orderID != null ? orderID.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object)
-    {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Orders))
-        {
+    public boolean equals(Object object) {
+        if (!(object instanceof Orders)) {
             return false;
         }
         Orders other = (Orders) object;
-        if ((this.orderID == null && other.orderID != null) || (this.orderID != null && !this.orderID.equals(other.orderID)))
-        {
+        if ((this.orderID == null && other.orderID != null) || (this.orderID != null && !this.orderID.equals(other.orderID))) {
             return false;
         }
         return true;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "model.resources.Orders[ orderID=" + orderID + " ]";
     }
 }

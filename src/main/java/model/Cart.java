@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
 import jakarta.persistence.Basic;
@@ -26,50 +22,46 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 
-/**
- *
- * @author Asus-FPT
- */
 @Entity
-@Table(name = "CART")
+@Table(name = "cart")
 @XmlRootElement
-@NamedQueries(
-{
-    @NamedQuery(name = "Cart.findAll", query = "SELECT c FROM Cart c"),
-    @NamedQuery(name = "Cart.findByCartID", query = "SELECT c FROM Cart c WHERE c.cartID = :cartID"),
-    @NamedQuery(name = "Cart.findByCreatedDate", query = "SELECT c FROM Cart c WHERE c.createdDate = :createdDate")
+@NamedQueries({
+        @NamedQuery(name = "Cart.findAll", query = "SELECT c FROM Cart c"),
+        @NamedQuery(name = "Cart.findByCartID", query = "SELECT c FROM Cart c WHERE c.cartID = :cartID"),
+        @NamedQuery(name = "Cart.findByCreatedDate", query = "SELECT c FROM Cart c WHERE c.createdDate = :createdDate"),
+        @NamedQuery(name = "Cart.getCartByUser", query = "SELECT c FROM Cart c LEFT JOIN FETCH c.cartitemsCollection WHERE c.userID = :user"),
+        @NamedQuery(name = "Cart.clearCartItems", query = "DELETE FROM Cartitems ci WHERE ci.cartID = :cart")
 })
-public class Cart implements Serializable
-{
-
+public class Cart implements Serializable {
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "CartID")
+    @Column(name = "cartid") // Lowercase to match Postgres
     private Integer cartID;
+
     @Basic(optional = false)
     @NotNull
-    @Column(name = "CreatedDate")
+    @Column(name = "createddate") // Lowercase
     @Temporal(TemporalType.DATE)
     private Date createdDate;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cartID")
     private Collection<Cartitems> cartitemsCollection;
-    @JoinColumn(name = "UserID", referencedColumnName = "UserID")
+
+    @JoinColumn(name = "userid", referencedColumnName = "userid") // Lowercase to match Users entity
     @ManyToOne(optional = false)
     private Users userID;
 
-    public Cart()
-    {
+    public Cart() {
     }
 
-    public Cart(Integer cartID)
-    {
+    public Cart(Integer cartID) {
         this.cartID = cartID;
     }
 
-    public Cart(Integer cartID, Date createdDate)
-    {
+    public Cart(Integer cartID, Date createdDate) {
         this.cartID = cartID;
         this.createdDate = createdDate;
     }
@@ -80,75 +72,60 @@ public class Cart implements Serializable
         this.userID = userID;
     }
 
-    public Integer getCartID()
-    {
+    public Integer getCartID() {
         return cartID;
     }
 
-    public void setCartID(Integer cartID)
-    {
+    public void setCartID(Integer cartID) {
         this.cartID = cartID;
     }
 
-    public Date getCreatedDate()
-    {
+    public Date getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Date createdDate)
-    {
+    public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
 
     @XmlTransient
-    public Collection<Cartitems> getCartitemsCollection()
-    {
+    public Collection<Cartitems> getCartitemsCollection() {
         return cartitemsCollection;
     }
 
-    public void setCartitemsCollection(Collection<Cartitems> cartitemsCollection)
-    {
+    public void setCartitemsCollection(Collection<Cartitems> cartitemsCollection) {
         this.cartitemsCollection = cartitemsCollection;
     }
 
-    public Users getUserID()
-    {
+    public Users getUserID() {
         return userID;
     }
 
-    public void setUserID(Users userID)
-    {
+    public void setUserID(Users userID) {
         this.userID = userID;
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int hash = 0;
         hash += (cartID != null ? cartID.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object)
-    {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Cart))
-        {
+    public boolean equals(Object object) {
+        if (!(object instanceof Cart)) {
             return false;
         }
         Cart other = (Cart) object;
-        if ((this.cartID == null && other.cartID != null) || (this.cartID != null && !this.cartID.equals(other.cartID)))
-        {
+        if ((this.cartID == null && other.cartID != null) || (this.cartID != null && !this.cartID.equals(other.cartID))) {
             return false;
         }
         return true;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "model.resources.Cart[ cartID=" + cartID + " ]";
     }
-    
 }

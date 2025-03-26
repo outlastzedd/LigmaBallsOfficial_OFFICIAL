@@ -10,7 +10,6 @@
     <class>model.Colors</class>
     <class>model.Sizes</class>
     <class>model.Productimages</class>
-    <class>model.Voucher</class>
     <class>model.Inventory</class>
     <class>model.Orderstatus</class>
     <class>model.ShippingCompanies</class>

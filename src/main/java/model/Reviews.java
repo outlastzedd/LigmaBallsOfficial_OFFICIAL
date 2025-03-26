@@ -20,148 +20,124 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "REVIEWS")
+@Table(name = "reviews") // Lowercase
 @XmlRootElement
-@NamedQueries(
-{
-    @NamedQuery(name = "Reviews.findAll", query = "SELECT r FROM Reviews r"),
-    @NamedQuery(name = "Reviews.findByReviewID", query = "SELECT r FROM Reviews r WHERE r.reviewID = :reviewID"),
-    @NamedQuery(name = "Reviews.findByRating", query = "SELECT r FROM Reviews r WHERE r.rating = :rating"),
-    @NamedQuery(name = "Reviews.findByComment", query = "SELECT r FROM Reviews r WHERE r.comment = :comment"),
-    @NamedQuery(name = "Reviews.findByReviewDate", query = "SELECT r FROM Reviews r WHERE r.reviewDate = :reviewDate")
+@NamedQueries({
+        @NamedQuery(name = "Reviews.findAll", query = "SELECT r FROM Reviews r"),
+        @NamedQuery(name = "Reviews.findByReviewID", query = "SELECT r FROM Reviews r WHERE r.reviewID = :reviewID"),
+        @NamedQuery(name = "Reviews.findByRating", query = "SELECT r FROM Reviews r WHERE r.rating = :rating"),
+        @NamedQuery(name = "Reviews.findByComment", query = "SELECT r FROM Reviews r WHERE r.comment = :comment"),
+        @NamedQuery(name = "Reviews.findByReviewDate", query = "SELECT r FROM Reviews r WHERE r.reviewDate = :reviewDate")
 })
-public class Reviews implements Serializable
-{
+public class Reviews implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "ReviewID")
+    @Column(name = "reviewid") // Lowercase
     private Integer reviewID;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "Rating")
+    @Column(name = "rating") // Lowercase
     private int rating;
     @Size(max = 500)
-    @Column(name = "Comment")
+    @Column(name = "comment") // Lowercase
     private String comment;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "ReviewDate")
+    @Column(name = "reviewdate") // Lowercase
     @Temporal(TemporalType.DATE)
     private Date reviewDate;
-    @JoinColumn(name = "ProductID", referencedColumnName = "ProductID")
+    @JoinColumn(name = "productid", referencedColumnName = "productid") // Lowercase
     @ManyToOne(optional = false)
     private Products productID;
-    @JoinColumn(name = "UserID", referencedColumnName = "UserID")
+    @JoinColumn(name = "userid", referencedColumnName = "userid") // Lowercase
     @ManyToOne(optional = false)
     private Users userID;
 
-    public Reviews()
-    {
+    public Reviews() {
     }
 
-    public Reviews(Integer reviewID)
-    {
+    public Reviews(Integer reviewID) {
         this.reviewID = reviewID;
     }
 
-    public Reviews(Integer reviewID, int rating, Date reviewDate)
-    {
+    public Reviews(Integer reviewID, int rating, Date reviewDate) {
         this.reviewID = reviewID;
         this.rating = rating;
         this.reviewDate = reviewDate;
     }
 
-    public Integer getReviewID()
-    {
+    public Integer getReviewID() {
         return reviewID;
     }
 
-    public void setReviewID(Integer reviewID)
-    {
+    public void setReviewID(Integer reviewID) {
         this.reviewID = reviewID;
     }
 
-    public int getRating()
-    {
+    public int getRating() {
         return rating;
     }
 
-    public void setRating(int rating)
-    {
+    public void setRating(int rating) {
         this.rating = rating;
     }
 
-    public String getComment()
-    {
+    public String getComment() {
         return comment;
     }
 
-    public void setComment(String comment)
-    {
+    public void setComment(String comment) {
         this.comment = comment;
     }
 
-    public Date getReviewDate()
-    {
+    public Date getReviewDate() {
         return reviewDate;
     }
 
-    public void setReviewDate(Date reviewDate)
-    {
+    public void setReviewDate(Date reviewDate) {
         this.reviewDate = reviewDate;
     }
 
-    public Products getProductID()
-    {
+    public Products getProductID() {
         return productID;
     }
 
-    public void setProductID(Products productID)
-    {
+    public void setProductID(Products productID) {
         this.productID = productID;
     }
 
-    public Users getUserID()
-    {
+    public Users getUserID() {
         return userID;
     }
 
-    public void setUserID(Users userID)
-    {
+    public void setUserID(Users userID) {
         this.userID = userID;
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int hash = 0;
         hash += (reviewID != null ? reviewID.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object)
-    {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Reviews))
-        {
+    public boolean equals(Object object) {
+        if (!(object instanceof Reviews)) {
             return false;
         }
         Reviews other = (Reviews) object;
-        if ((this.reviewID == null && other.reviewID != null) || (this.reviewID != null && !this.reviewID.equals(other.reviewID)))
-        {
+        if ((this.reviewID == null && other.reviewID != null) || (this.reviewID != null && !this.reviewID.equals(other.reviewID))) {
             return false;
         }
         return true;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "model.resources.Reviews[ reviewID=" + reviewID + " ]";
     }
-    
 }

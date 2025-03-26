@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
 import jakarta.persistence.Basic;
@@ -22,124 +18,100 @@ import jakarta.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.util.Collection;
 
-/**
- *
- * @author Asus-FPT
- */
 @Entity
-@Table(name = "SIZES")
+@Table(name = "sizes") // Lowercase
 @XmlRootElement
-@NamedQueries(
-{
-    @NamedQuery(name = "Sizes.findAll", query = "SELECT s FROM Sizes s"),
-    @NamedQuery(name = "Sizes.findBySizeID", query = "SELECT s FROM Sizes s WHERE s.sizeID = :sizeID"),
-    @NamedQuery(name = "Sizes.findBySizeName", query = "SELECT s FROM Sizes s WHERE s.sizeName = :sizeName"),
-    @NamedQuery(name = "Sizes.findByDescription", query = "SELECT s FROM Sizes s WHERE s.description = :description")
+@NamedQueries({
+        @NamedQuery(name = "Sizes.findAll", query = "SELECT s FROM Sizes s"),
+        @NamedQuery(name = "Sizes.findBySizeID", query = "SELECT s FROM Sizes s WHERE s.sizeID = :sizeID"),
+        @NamedQuery(name = "Sizes.findBySizeName", query = "SELECT s FROM Sizes s WHERE s.sizeName = :sizeName"),
+        @NamedQuery(name = "Sizes.findByDescription", query = "SELECT s FROM Sizes s WHERE s.description = :description")
 })
-public class Sizes implements Serializable
-{
+public class Sizes implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "SizeID")
+    @Column(name = "sizeid") // Lowercase
     private Integer sizeID;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
-    @Column(name = "SizeName")
+    @Column(name = "sizename") // Lowercase
     private String sizeName;
     @Size(max = 100)
-    @Column(name = "Description")
+    @Column(name = "description") // Lowercase
     private String description;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sizeID")
     private Collection<Productsizecolor> productsizecolorCollection;
 
-    public Sizes()
-    {
+    public Sizes() {
     }
 
-    public Sizes(Integer sizeID)
-    {
+    public Sizes(Integer sizeID) {
         this.sizeID = sizeID;
     }
 
-    public Sizes(Integer sizeID, String sizeName)
-    {
+    public Sizes(Integer sizeID, String sizeName) {
         this.sizeID = sizeID;
         this.sizeName = sizeName;
     }
 
-    public Integer getSizeID()
-    {
+    public Integer getSizeID() {
         return sizeID;
     }
 
-    public void setSizeID(Integer sizeID)
-    {
+    public void setSizeID(Integer sizeID) {
         this.sizeID = sizeID;
     }
 
-    public String getSizeName()
-    {
+    public String getSizeName() {
         return sizeName;
     }
 
-    public void setSizeName(String sizeName)
-    {
+    public void setSizeName(String sizeName) {
         this.sizeName = sizeName;
     }
 
-    public String getDescription()
-    {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description)
-    {
+    public void setDescription(String description) {
         this.description = description;
     }
 
     @XmlTransient
-    public Collection<Productsizecolor> getProductsizecolorCollection()
-    {
+    public Collection<Productsizecolor> getProductsizecolorCollection() {
         return productsizecolorCollection;
     }
 
-    public void setProductsizecolorCollection(Collection<Productsizecolor> productsizecolorCollection)
-    {
+    public void setProductsizecolorCollection(Collection<Productsizecolor> productsizecolorCollection) {
         this.productsizecolorCollection = productsizecolorCollection;
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int hash = 0;
         hash += (sizeID != null ? sizeID.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object)
-    {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Sizes))
-        {
+    public boolean equals(Object object) {
+        if (!(object instanceof Sizes)) {
             return false;
         }
         Sizes other = (Sizes) object;
-        if ((this.sizeID == null && other.sizeID != null) || (this.sizeID != null && !this.sizeID.equals(other.sizeID)))
-        {
+        if ((this.sizeID == null && other.sizeID != null) || (this.sizeID != null && !this.sizeID.equals(other.sizeID))) {
             return false;
         }
         return true;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "model.resources.Sizes[ sizeID=" + sizeID + " ]";
     }
-    
 }

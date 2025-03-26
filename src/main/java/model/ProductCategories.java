@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
 import jakarta.persistence.Basic;
@@ -18,36 +14,30 @@ import jakarta.persistence.Table;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
-/**
- *
- * @author Asus-FPT
- */
 @Entity
-@Table(name = "ProductCategories")
+@Table(name = "productcategories") // Lowercase
 @XmlRootElement
-@NamedQueries(
-        {
-            @NamedQuery(name = "ProductCategories.findAll", query = "SELECT p FROM ProductCategories p"),
-            @NamedQuery(name = "ProductCategories.categorizeProducts",
-            query = "SELECT p FROM ProductCategories pc "
-                    + "INNER JOIN pc.productID p "
-                    + "WHERE pc.categoryID.categoryID = :categoryID "
-                    + "AND LOWER(p.productName) LIKE LOWER(CONCAT('%', :keyword, '%'))"
-                    + "AND pc.productID.status = TRUE"),
-        }
-)
+@NamedQueries({
+        @NamedQuery(name = "ProductCategories.findAll", query = "SELECT p FROM ProductCategories p"),
+        @NamedQuery(name = "ProductCategories.categorizeProducts",
+                query = "SELECT p FROM ProductCategories pc " +
+                        "INNER JOIN pc.productID p " +
+                        "WHERE pc.categoryID.categoryID = :categoryID " +
+                        "AND LOWER(p.productName) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
+                        "AND pc.productID.status = TRUE"),
+})
 public class ProductCategories implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "ProductCategoryID")
+    @Column(name = "productcategoryid") // Lowercase
     private Integer productCategoryID;
-    @JoinColumn(name = "CategoryID", referencedColumnName = "CategoryID")
+    @JoinColumn(name = "categoryid", referencedColumnName = "categoryid") // Lowercase
     @ManyToOne(optional = false)
     private Categories categoryID;
-    @JoinColumn(name = "ProductID", referencedColumnName = "ProductID")
+    @JoinColumn(name = "productid", referencedColumnName = "productid") // Lowercase
     @ManyToOne(optional = false)
     private Products productID;
 
@@ -91,7 +81,6 @@ public class ProductCategories implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof ProductCategories)) {
             return false;
         }
@@ -106,5 +95,4 @@ public class ProductCategories implements Serializable {
     public String toString() {
         return "model.resources.ProductCategories[ productCategoryID=" + productCategoryID + " ]";
     }
-
 }

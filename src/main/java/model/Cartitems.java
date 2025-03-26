@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
 import jakarta.persistence.Basic;
@@ -22,139 +18,110 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- *
- * @author Asus-FPT
- */
 @Entity
-@Table(name = "CARTITEMS")
+@Table(name = "cartitems") // Lowercase for Postgres
 @XmlRootElement
-@NamedQueries(
-{
-    @NamedQuery(name = "Cartitems.findAll", query = "SELECT c FROM Cartitems c"),
-    @NamedQuery(name = "Cartitems.findByCartItemID", query = "SELECT c FROM Cartitems c WHERE c.cartItemID = :cartItemID"),
-    @NamedQuery(name = "Cartitems.findByQuantity", query = "SELECT c FROM Cartitems c WHERE c.quantity = :quantity"),
-    @NamedQuery(name = "Cartitems.findByAddedDate", query = "SELECT c FROM Cartitems c WHERE c.addedDate = :addedDate")
+@NamedQueries({
+        @NamedQuery(name = "Cartitems.findAll", query = "SELECT c FROM Cartitems c"),
+        @NamedQuery(name = "Cartitems.findByCartItemID", query = "SELECT c FROM Cartitems c WHERE c.cartItemID = :cartItemID"),
+        @NamedQuery(name = "Cartitems.findByQuantity", query = "SELECT c FROM Cartitems c WHERE c.quantity = :quantity"),
+        @NamedQuery(name = "Cartitems.findByAddedDate", query = "SELECT c FROM Cartitems c WHERE c.addedDate = :addedDate")
 })
-public class Cartitems implements Serializable
-{
+public class Cartitems implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "CartItemID")
+    @Column(name = "cartitemid") // Lowercase
     private Integer cartItemID;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "Quantity")
+    @Column(name = "quantity") // Lowercase
     private int quantity;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "AddedDate")
+    @Column(name = "addeddate") // Lowercase
     @Temporal(TemporalType.TIMESTAMP)
     private Date addedDate;
-    @JoinColumn(name = "CartID", referencedColumnName = "CartID")
+    @JoinColumn(name = "cartid", referencedColumnName = "cartid") // Lowercase
     @ManyToOne(optional = false)
     private Cart cartID;
-    @JoinColumn(name = "ProductSizeColorID", referencedColumnName = "ProductSizeColorID")
+    @JoinColumn(name = "productsizecolorid", referencedColumnName = "productsizecolorid") // Lowercase
     @ManyToOne(optional = false)
     private Productsizecolor productSizeColorID;
 
-    public Cartitems()
-    {
-    }
+    public Cartitems() {}
 
-    public Cartitems(Integer cartItemID)
-    {
+    public Cartitems(Integer cartItemID) {
         this.cartItemID = cartItemID;
     }
 
-    public Cartitems(Integer cartItemID, int quantity, Date addedDate)
-    {
+    public Cartitems(Integer cartItemID, int quantity, Date addedDate) {
         this.cartItemID = cartItemID;
         this.quantity = quantity;
         this.addedDate = addedDate;
     }
 
-    public Integer getCartItemID()
-    {
+    public Integer getCartItemID() {
         return cartItemID;
     }
 
-    public void setCartItemID(Integer cartItemID)
-    {
+    public void setCartItemID(Integer cartItemID) {
         this.cartItemID = cartItemID;
     }
 
-    public int getQuantity()
-    {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity)
-    {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
-    public Date getAddedDate()
-    {
+    public Date getAddedDate() {
         return addedDate;
     }
 
-    public void setAddedDate(Date addedDate)
-    {
+    public void setAddedDate(Date addedDate) {
         this.addedDate = addedDate;
     }
 
-    public Cart getCartID()
-    {
+    public Cart getCartID() {
         return cartID;
     }
 
-    public void setCartID(Cart cartID)
-    {
+    public void setCartID(Cart cartID) {
         this.cartID = cartID;
     }
 
-    public Productsizecolor getProductSizeColorID()
-    {
+    public Productsizecolor getProductSizeColorID() {
         return productSizeColorID;
     }
 
-    public void setProductSizeColorID(Productsizecolor productSizeColorID)
-    {
+    public void setProductSizeColorID(Productsizecolor productSizeColorID) {
         this.productSizeColorID = productSizeColorID;
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int hash = 0;
         hash += (cartItemID != null ? cartItemID.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object)
-    {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+    public boolean equals(Object object) {
         if (!(object instanceof Cartitems))
-        {
             return false;
-        }
         Cartitems other = (Cartitems) object;
         if ((this.cartItemID == null && other.cartItemID != null) || (this.cartItemID != null && !this.cartItemID.equals(other.cartItemID)))
-        {
             return false;
-        }
         return true;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "model.resources.Cartitems[ cartItemID=" + cartItemID + " ]";
     }
-    
 }

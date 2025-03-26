@@ -14,7 +14,7 @@ public class ChatbotDAO {
 
     public String getPrice(String productName) {
         try {
-            Query query = em.createQuery("SELECT p FROM Products p WHERE p.productName LIKE :name AND p.status = TRUE");
+            Query query = em.createNamedQuery("Products.getPrice");
             query.setParameter("name", "%" + productName + "%");
             Products product = (Products) query.setMaxResults(1).getSingleResult();
 
@@ -33,13 +33,7 @@ public class ChatbotDAO {
 
     public String getSizes(String productName) {
         try {
-            Query query = em.createQuery(
-                "SELECT DISTINCT s.sizeName FROM Productsizecolor psc " +
-                "JOIN psc.productID p " +
-                "JOIN psc.sizeID s " +
-                "WHERE p.productName LIKE :name AND p.status = TRUE", 
-                String.class
-            );
+            Query query = em.createNamedQuery("Productsizecolor.getSize", String.class);
             query.setParameter("name", "%" + productName + "%");
             List<String> sizes = query.getResultList();
             if (!sizes.isEmpty()) {
@@ -53,13 +47,7 @@ public class ChatbotDAO {
 
     public String getColors(String productName) {
         try {
-            Query query = em.createQuery(
-                "SELECT DISTINCT c.colorName FROM Productsizecolor psc " +
-                "JOIN psc.productID p " +
-                "JOIN psc.colorID c " +
-                "WHERE p.productName LIKE :name AND p.status = TRUE", 
-                String.class
-            );
+            Query query = em.createNamedQuery("Productsizecolor.getColors", String.class);
             query.setParameter("name", "%" + productName + "%");
             List<String> colors = query.getResultList();
             if (!colors.isEmpty()) {
@@ -73,8 +61,7 @@ public class ChatbotDAO {
 
     public String checkAvailabilityWithSizeAndColor(String productName, String size, String color) {
         try {
-            String jpql = "SELECT psc FROM Productsizecolor psc JOIN psc.product p " +
-                         "WHERE p.productName LIKE :name AND p.status = TRUE";
+            String jpql = "SELECT psc FROM Productsizecolor psc JOIN psc.productID p WHERE p.productName LIKE :name AND p.status = TRUE";
             if (size != null) jpql += " AND UPPER(TRIM(psc.size.sizeName)) = UPPER(:size)";
             if (color != null) jpql += " AND UPPER(TRIM(psc.color.colorName)) = UPPER(:color)";
             

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
 import jakarta.persistence.Basic;
@@ -20,136 +16,109 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-/**
- *
- * @author Asus-FPT
- */
 @Entity
-@Table(name = "ORDERDETAILS")
+@Table(name = "orderdetails") // Lowercase
 @XmlRootElement
-@NamedQueries(
-{
-    @NamedQuery(name = "Orderdetails.findAll", query = "SELECT o FROM Orderdetails o"),
-    @NamedQuery(name = "Orderdetails.findByOrderDetailID", query = "SELECT o FROM Orderdetails o WHERE o.orderDetailID = :orderDetailID"),
-    @NamedQuery(name = "Orderdetails.findByQuantity", query = "SELECT o FROM Orderdetails o WHERE o.quantity = :quantity"),
-    @NamedQuery(name = "Orderdetails.findByPrice", query = "SELECT o FROM Orderdetails o WHERE o.price = :price")
+@NamedQueries({
+        @NamedQuery(name = "Orderdetails.findAll", query = "SELECT o FROM Orderdetails o"),
+        @NamedQuery(name = "Orderdetails.findByOrderDetailID", query = "SELECT o FROM Orderdetails o WHERE o.orderDetailID = :orderDetailID"),
+        @NamedQuery(name = "Orderdetails.findByQuantity", query = "SELECT o FROM Orderdetails o WHERE o.quantity = :quantity"),
+        @NamedQuery(name = "Orderdetails.findByPrice", query = "SELECT o FROM Orderdetails o WHERE o.price = :price")
 })
-public class Orderdetails implements Serializable
-{
+public class Orderdetails implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "OrderDetailID")
+    @Column(name = "orderdetailid") // Lowercase
     private Integer orderDetailID;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "Quantity")
+    @Column(name = "quantity") // Lowercase
     private int quantity;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "Price")
+    @Column(name = "price") // Lowercase
     private BigDecimal price;
-    @JoinColumn(name = "OrderID", referencedColumnName = "OrderID")
+    @JoinColumn(name = "orderid", referencedColumnName = "orderid") // Lowercase
     @ManyToOne(optional = false)
     private Orders orderID;
-    @JoinColumn(name = "ProductSizeColorID", referencedColumnName = "ProductSizeColorID")
+    @JoinColumn(name = "productsizecolorid", referencedColumnName = "productsizecolorid") // Lowercase
     @ManyToOne(optional = false)
     private Productsizecolor productSizeColorID;
 
-    public Orderdetails()
-    {
+    public Orderdetails() {
     }
 
-    public Orderdetails(Integer orderDetailID)
-    {
+    public Orderdetails(Integer orderDetailID) {
         this.orderDetailID = orderDetailID;
     }
 
-    public Orderdetails(Integer orderDetailID, int quantity)
-    {
+    public Orderdetails(Integer orderDetailID, int quantity) {
         this.orderDetailID = orderDetailID;
         this.quantity = quantity;
     }
 
-    public Integer getOrderDetailID()
-    {
+    public Integer getOrderDetailID() {
         return orderDetailID;
     }
 
-    public void setOrderDetailID(Integer orderDetailID)
-    {
+    public void setOrderDetailID(Integer orderDetailID) {
         this.orderDetailID = orderDetailID;
     }
 
-    public int getQuantity()
-    {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity)
-    {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
-    public BigDecimal getPrice()
-    {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price)
-    {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
-    public Orders getOrderID()
-    {
+    public Orders getOrderID() {
         return orderID;
     }
 
-    public void setOrderID(Orders orderID)
-    {
+    public void setOrderID(Orders orderID) {
         this.orderID = orderID;
     }
 
-    public Productsizecolor getProductSizeColorID()
-    {
+    public Productsizecolor getProductSizeColorID() {
         return productSizeColorID;
     }
 
-    public void setProductSizeColorID(Productsizecolor productSizeColorID)
-    {
+    public void setProductSizeColorID(Productsizecolor productSizeColorID) {
         this.productSizeColorID = productSizeColorID;
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int hash = 0;
         hash += (orderDetailID != null ? orderDetailID.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object)
-    {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Orderdetails))
-        {
+    public boolean equals(Object object) {
+        if (!(object instanceof Orderdetails)) {
             return false;
         }
         Orderdetails other = (Orderdetails) object;
-        if ((this.orderDetailID == null && other.orderDetailID != null) || (this.orderDetailID != null && !this.orderDetailID.equals(other.orderDetailID)))
-        {
+        if ((this.orderDetailID == null && other.orderDetailID != null) || (this.orderDetailID != null && !this.orderDetailID.equals(other.orderDetailID))) {
             return false;
         }
         return true;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "model.resources.Orderdetails[ orderDetailID=" + orderDetailID + " ]";
     }
-    
 }

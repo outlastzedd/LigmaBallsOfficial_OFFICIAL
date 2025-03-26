@@ -18,105 +18,87 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "PRODUCTIMAGES")
+@Table(name = "productimages") // Lowercase
 @XmlRootElement
-@NamedQueries(
-{
-    @NamedQuery(name = "Productimages.findAll", query = "SELECT p FROM Productimages p"),
-    @NamedQuery(name = "Productimages.findByImageID", query = "SELECT p FROM Productimages p WHERE p.imageID = :imageID")
+@NamedQueries({
+        @NamedQuery(name = "Productimages.findAll", query = "SELECT p FROM Productimages p"),
+        @NamedQuery(name = "Productimages.findByImageID", query = "SELECT p FROM Productimages p WHERE p.imageID = :imageID")
 })
-public class Productimages implements Serializable
-{
+public class Productimages implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "ImageID")
+    @Column(name = "imageid") // Lowercase
     private Integer imageID;
     @Basic(optional = false)
     @NotNull
     @Lob
     @Size(min = 1, max = 2147483647)
-    @Column(name = "ImageURL")
+    @Column(name = "imageurl") // Lowercase
     private String imageURL;
-    @JoinColumn(name = "ProductID", referencedColumnName = "ProductID")
+    @JoinColumn(name = "productid", referencedColumnName = "productid") // Lowercase
     @ManyToOne(optional = false)
     private Products productID;
 
-    public Productimages()
-    {
+    public Productimages() {
     }
 
-    public Productimages(Integer imageID)
-    {
+    public Productimages(Integer imageID) {
         this.imageID = imageID;
     }
 
-    public Productimages(Integer imageID, String imageURL)
-    {
+    public Productimages(Integer imageID, String imageURL) {
         this.imageID = imageID;
         this.imageURL = imageURL;
     }
 
-    public Integer getImageID()
-    {
+    public Integer getImageID() {
         return imageID;
     }
 
-    public void setImageID(Integer imageID)
-    {
+    public void setImageID(Integer imageID) {
         this.imageID = imageID;
     }
 
-    public String getImageURL()
-    {
+    public String getImageURL() {
         return imageURL;
     }
 
-    public void setImageURL(String imageURL)
-    {
+    public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
     }
 
-    public Products getProductID()
-    {
+    public Products getProductID() {
         return productID;
     }
 
-    public void setProductID(Products productID)
-    {
+    public void setProductID(Products productID) {
         this.productID = productID;
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int hash = 0;
         hash += (imageID != null ? imageID.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object)
-    {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Productimages))
-        {
+    public boolean equals(Object object) {
+        if (!(object instanceof Productimages)) {
             return false;
         }
         Productimages other = (Productimages) object;
-        if ((this.imageID == null && other.imageID != null) || (this.imageID != null && !this.imageID.equals(other.imageID)))
-        {
+        if ((this.imageID == null && other.imageID != null) || (this.imageID != null && !this.imageID.equals(other.imageID))) {
             return false;
         }
         return true;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "model.resources.Productimages[ imageID=" + imageID + " ]";
     }
-    
 }

@@ -44,8 +44,8 @@ public class CartDAO implements ICartDao {
     public Cart getCartByUser(Users user) {
         try {
             em.clear(); // Clear first-level cache
-            TypedQuery<Cart> query = em.createQuery(
-                    "SELECT c FROM Cart c LEFT JOIN FETCH c.cartitemsCollection WHERE c.userID = :user", Cart.class);
+            TypedQuery<Cart> query = em.createNamedQuery(
+                    "Cart.getCartByUser", Cart.class);
             query.setParameter("user", user);
             return query.getSingleResult();
         } catch (NoResultException e) {
@@ -59,7 +59,7 @@ public class CartDAO implements ICartDao {
         EntityTransaction transaction = em.getTransaction();
         try {
             transaction.begin();
-            int deletedCount = em.createQuery("DELETE FROM Cartitems ci WHERE ci.cartID = :cart")
+            int deletedCount = em.createNamedQuery("Cart.clearCartItems")
                     .setParameter("cart", cart)
                     .executeUpdate();
             transaction.commit();
