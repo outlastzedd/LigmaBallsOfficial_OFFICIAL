@@ -37,15 +37,16 @@ public class UserDAO implements IUserDAO
         return null;
     }
     
-    public boolean checkRegister(String fullname, String email, String phone, String password) {
+    public Users checkRegister(String fullname, String email, String phone, String password) {
+        Users user = new Users(fullname, email, password, phone, "user", true);
         TypedQuery<Long> checkExistingQuery = em.createNamedQuery("Users.checkExisting", Long.class);
         checkExistingQuery.setParameter("email", email);
         checkExistingQuery.setParameter("phoneNumber", phone);
         if (checkExistingQuery.getSingleResult() == null || checkExistingQuery.getSingleResult() == 0) {
-            insertUser(new Users(fullname, email, password, phone));
-            return true;
+            insertUser(user);
+            return user;
         } else
-            return false;
+            return null;
     }
 
     @Override

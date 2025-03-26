@@ -46,8 +46,8 @@ public class GoogleServlet extends HttpServlet {
                         session.setAttribute("user", user);
                         request.getRequestDispatcher("/test").forward(request, response);
                     } else {
-                        userDAO.checkRegister(acc.getName(), acc.getEmail(), "", "abc@123");
-                        session.setAttribute("user", user);
+                        user = userDAO.checkRegister(acc.getName(), acc.getEmail(), "", "abc@123");
+                        if (user != null) session.setAttribute("user", user);
                         request.getRequestDispatcher("/test").forward(request, response);
                     }
                 } else {
