@@ -14,13 +14,13 @@ public class mainTest extends HttpServlet {
     static {
         Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
         System.out.println("ProductServlet: Loaded environment variables from .env");
-        String URL = dotenv.get("DATABASE_URL");
-        System.out.println("ProductServlet: DATABASE_URL = " + URL);
+        String URL = dotenv.get("JDBC_DATABASE_URL");
+        System.out.println("ProductServlet: JDBC_DATABASE_URL = " + URL);
         if (URL != null) {
-            System.setProperty("DATABASE_URL", dotenv.get("DATABASE_URL"));
+            System.setProperty("JDBC_DATABASE_URL", dotenv.get("JDBC_DATABASE_URL"));
         }
-        System.out.println("ProductServlet: SystemProperty DATABASE_URL = " + System.getProperty("DATABASE_URL"));
-        System.out.println("ProductServlet: EnvProperty DATABASE_URL = " + System.getenv("DATABASE_URL"));
+        System.out.println("ProductServlet: SystemProperty JDBC_DATABASE_URL = " + System.getProperty("JDBC_DATABASE_URL"));
+        System.out.println("ProductServlet: EnvProperty JDBC_DATABASE_URL = " + System.getenv("JDBC_DATABASE_URL"));
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
