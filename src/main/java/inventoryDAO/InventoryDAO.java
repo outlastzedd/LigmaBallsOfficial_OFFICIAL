@@ -21,10 +21,7 @@ public class InventoryDAO implements IInventoryDAO {
                         "psc.productSizeColorID, " +
                         "psc.productID.productID, " +
                         "psc.sizeID.sizeID, " +
-                        "COALESCE(psc.price, psc.productID.price), " +
-                        "i.stock, " +
-                        "FUNCTION('TIMESTAMP', i.lastUpdated), " + // Convert Date to LocalDateTime
-                        "COALESCE(SUM(od.quantity), 0)) " +
+                        "i.stock) " +
                         "FROM Productsizecolor psc " +
                         "LEFT JOIN psc.inventoryCollection i " +
                         "LEFT JOIN psc.orderdetailsCollection od " +
@@ -42,10 +39,10 @@ public class InventoryDAO implements IInventoryDAO {
     }
 
     public static void main(String[] args) {
-        InventoryDAO dao = new InventoryDAO();
-        List<ProductStockInfo> list = dao.getProductStockInfo();
-        for (ProductStockInfo info : list) {
-            System.out.println(info.getProductSizeColorID());
+        InventoryDAO i = new InventoryDAO();
+        List<ProductStockInfo> stockInfo = i.getProductStockInfo();
+        for (ProductStockInfo info : stockInfo) {
+            System.out.println("PSC ID: " + info.getProductSizeColorID() + "Stock: " + info.getStock());
         }
     }
 }

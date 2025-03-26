@@ -4,53 +4,50 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class ProductStockInfo {
-    private int productSizeColorID;
-    private int productID;
-    private int sizeID;
-    private BigDecimal productPrice;
+    private Integer productSizeColorID;
+    private Integer productID;
+    private Integer sizeID;
     private Integer stock; // Có thể null nếu không có tồn kho
-    private LocalDateTime lastUpdated;
-    private int totalOrderedQuantity;
 
-    public ProductStockInfo(int productSizeColorID, int productID, int sizeID, BigDecimal productPrice, Integer stock, LocalDateTime lastUpdated, int totalOrderedQuantity) {
+    public ProductStockInfo(Integer productSizeColorID, Integer productID, Integer sizeID, Integer stock) {
         this.productSizeColorID = productSizeColorID;
         this.productID = productID;
         this.sizeID = sizeID;
-        this.productPrice = productPrice;
         this.stock = stock;
-        this.lastUpdated = lastUpdated;
-        this.totalOrderedQuantity = totalOrderedQuantity;
     }
 
     public ProductStockInfo() {
     }
 
-    // Getters & Setters
-    public int getProductSizeColorID() {
+    public Integer getProductSizeColorID() {
         return productSizeColorID;
     }
 
-    public int getProductID() {
+    public void setProductSizeColorID(Integer productSizeColorID) {
+        this.productSizeColorID = productSizeColorID;
+    }
+
+    public Integer getProductID() {
         return productID;
     }
 
-    public int getSizeID() {
+    public void setProductID(Integer productID) {
+        this.productID = productID;
+    }
+
+    public Integer getSizeID() {
         return sizeID;
     }
 
-    public BigDecimal getProductPrice() {
-        return productPrice;
+    public void setSizeID(Integer sizeID) {
+        this.sizeID = sizeID;
     }
 
     public Integer getStock() {
         return stock;
     }
 
-    public LocalDateTime getLastUpdated() {
-        return lastUpdated;
-    }
-
-    public int getTotalOrderedQuantity() {
-        return totalOrderedQuantity;
+    public void setStock(Integer stock) {
+        this.stock = stock;
     }
 }

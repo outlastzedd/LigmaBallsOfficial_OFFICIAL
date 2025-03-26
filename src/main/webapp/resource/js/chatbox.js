@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
         messages.appendChild(userMessage);
 
         // Send message to server
-        fetch("/LigmaBallsOfficial/ChatServlet", {
+        fetch("/ChatServlet", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" },
             body: "message=" + encodeURIComponent(input)
