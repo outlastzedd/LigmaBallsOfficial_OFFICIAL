@@ -40,7 +40,6 @@ public class PaymentMethods implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "methodname") // Lowercase
     private String methodName;
-    @Lob
     @Size(max = 2147483647)
     @Column(name = "description") // Lowercase
     private String description;
