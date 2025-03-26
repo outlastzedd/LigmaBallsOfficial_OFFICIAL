@@ -27,7 +27,7 @@ public class CheckoutServlet extends HttpServlet {
 
     private static final String vnp_TmnCode = "X3CYJAHU";
     private static final String vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-    private static final String vnp_ReturnUrl = "http://localhost:8080/LigmaBallsOfficial/vnpayreturn";
+    private static final String vnp_ReturnUrl = "https://ligma-shop-49f1782b6042.herokuapp.com/vnpayreturn";
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
