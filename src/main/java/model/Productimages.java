@@ -34,7 +34,6 @@ public class Productimages implements Serializable {
     private Integer imageID;
     @Basic(optional = false)
     @NotNull
-    @Lob
     @Size(min = 1, max = 2147483647)
     @Column(name = "imageurl") // Lowercase
     private String imageURL;
