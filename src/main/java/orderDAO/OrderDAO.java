@@ -15,8 +15,10 @@ import model.Orders;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author ADMIN
@@ -92,14 +94,14 @@ public class OrderDAO implements IOrderDAO {
 
     @Override
     public List<Orders> getAllOrders() {
-        TypedQuery<Orders> query = em.createQuery("SELECT o FROM Orders o", Orders.class);
+        TypedQuery<Orders> query = em.createQuery("SELECT o FROM Orders o ORDER BY o.orderDate DESC", Orders.class);
         return query.getResultList();
     }
 
     @Override
     public List<Orders> getOrdersByPaymentMethod(int paymentMethodID) {
         TypedQuery<Orders> query = em.createQuery(
-                "SELECT o FROM Orders o WHERE o.paymentMethodID.paymentMethodID = :paymentMethodID", Orders.class);
+                "SELECT o FROM Orders o WHERE o.paymentMethodID.paymentMethodID = :paymentMethodID ORDER BY o.orderDate DESC", Orders.class);
         query.setParameter("paymentMethodID", paymentMethodID);
         return query.getResultList();
     }
@@ -107,7 +109,7 @@ public class OrderDAO implements IOrderDAO {
     @Override
     public List<Orders> searchOrdersById(int searchId) {
         TypedQuery<Orders> query = em.createQuery(
-                "SELECT o FROM Orders o WHERE o.orderID = :searchId OR o.userID.userID = :searchId", Orders.class);
+                "SELECT o FROM Orders o WHERE o.orderID = :searchId OR o.userID.userID = :searchId ORDER BY o.orderDate DESC", Orders.class);
         query.setParameter("searchId", searchId);
         return query.getResultList();
     }
@@ -115,7 +117,7 @@ public class OrderDAO implements IOrderDAO {
     @Override
     public List<Orders> searchOrdersByName(String name) {
         TypedQuery<Orders> query = em.createQuery(
-                "SELECT o FROM Orders o JOIN FETCH o.userID u JOIN FETCH o.paymentMethodID WHERE u.fullName LIKE :name", Orders.class);
+                "SELECT o FROM Orders o JOIN FETCH o.userID u JOIN FETCH o.paymentMethodID WHERE u.fullName LIKE :name ORDER BY o.orderDate DESC", Orders.class);
         query.setParameter("name", "%" + name + "%"); // Tìm kiếm gần đúng
         return query.getResultList();
     }
