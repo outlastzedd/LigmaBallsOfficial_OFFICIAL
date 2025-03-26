@@ -30,7 +30,7 @@ public class ProductServlet extends HttpServlet {
         weather = (weather == null ? "all" : weather);
 
         String sortOrder = request.getParameter("sortOrder");
-        sortOrder= (sortOrder==null? "nosort" : sortOrder);
+        sortOrder = (sortOrder == null ? "nosort" : sortOrder);
         List<Products> products = productDAO.selectAllProductsActive();
         List<Categories> listCategory = productDAO.selectAllCategory();
         String query = request.getParameter("query");
@@ -55,8 +55,13 @@ public class ProductServlet extends HttpServlet {
             return;
         }
         System.out.println("ProductServlet: Forwarding to guest.jsp");
-        dispatcher.forward(request, response);
-        System.out.println("ProductServlet: Forward to guest.jsp completed");
+        try {
+            dispatcher.forward(request, response);
+            System.out.println("ProductServlet: Forward to guest.jsp completed");
+        } catch (ServletException | IOException e) {
+            System.out.println("ProductServlet: Error forwarding to guest.jsp: " + e.getMessage());
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error forwarding to guest.jsp");
+        }
     }
 
     @Override

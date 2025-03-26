@@ -30,7 +30,7 @@ public class OrderDetailsServlet extends HttpServlet {
         Users user = (Users) session.getAttribute("user");
 
         if (user == null) {
-            response.sendRedirect("ligmaShop/login/login.jsp");
+            response.sendRedirect("ligmaShop/login/signIn.jsp");
             return;
         }
 
