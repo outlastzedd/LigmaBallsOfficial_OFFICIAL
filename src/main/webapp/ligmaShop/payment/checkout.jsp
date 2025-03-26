@@ -213,6 +213,43 @@
                                 <c:set var="totalPrice" value="0"/>
                                 <c:set var="productsList" value=""/>
                                 <c:choose>
+                                    <c:when test="${isBuyNow}">
+                                        <c:set var="buyNowItem" value="${requestScope.buyNowItem}"/>
+                                        <c:set var="buyNowProduct" value="${buyNowItem.productSizeColorID.productID}"/>
+                                        <c:set var="rawPrice" value="${buyNowProduct.price}"/>
+                                        <tr>
+                                            <td>
+                                                <c:choose>
+                                                    <c:when test="${not empty buyNowProduct.productimagesCollection}">
+                                                        <img src="${buyNowProduct.productimagesCollection[0].imageURL}"
+                                                             alt=""
+                                                             class="cart__item-img">
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <img src="${pageContext.request.contextPath}/resource/images/default-product.jpg"
+                                                             alt="" class="cart__item-img">
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </td>
+                                            <td>${buyNowProduct.productName}</td>
+                                            <td>${buyNowItem.productSizeColorID.sizeID.sizeName}</td>
+                                            <td>${buyNowItem.quantity}</td>
+
+                                            <td><fmt:formatNumber value="${requestScope.buyNowAdjustedPrice}"
+                                                                  type="number" pattern="#,##0"
+                                                                  groupingUsed="true"/> đ
+                                            </td>
+                                            <td><fmt:formatNumber value="${requestScope.totalAmount}" type="number"
+                                                                  pattern="#,##0" groupingUsed="true"/> đ
+                                            </td>
+                                        </tr>
+                                        <c:set var="productsList"
+                                               value="${productsList}${productsList != '' ? ', ' : ''}${buyNowProduct.productName} (Kích thước: ${buyNowItem.productSizeColorID.sizeID.sizeName}, Số lượng: ${buyNowItem.quantity}, Giá: ${requestScope.buyNowAdjustedPrice})"/>
+
+                                        <%--                                               value="${buyNowProduct.productName} (Kích thước: ${buyNowItem.productSizeColorID.sizeID.sizeName}, Số lượng: ${buyNowItem.quantity}, Giá: ${buyNowProduct.price})"/>--%>
+                                    </c:when>
+
+
                                     <c:when test="${not empty sessionScope.cartItems}">
                                         <c:forEach var="item" items="${sessionScope.cartItems}">
                                             <c:set var="product" value="${item.productSizeColorID.productID}"/>
@@ -242,11 +279,13 @@
                                                 <td>${item.productSizeColorID.sizeID.sizeName}</td>
                                                 <td>${item.quantity}</td>
                                                 <td><fmt:formatNumber value="${adjustedPrice}" type="number"
+                                                                      pattern="#,##0"
                                                                       groupingUsed="true"/> đ
                                                 </td>
                                                 <td>
                                                     <fmt:formatNumber value="${adjustedPrice * item.quantity}"
-                                                                      type="number" groupingUsed="true"/> đ
+                                                                      type="number" pattern="#,##0"
+                                                                      groupingUsed="true"/> đ
                                                     <c:set var="totalPrice"
                                                            value="${totalPrice + (adjustedPrice * item.quantity)}"/>
                                                 </td>
@@ -268,9 +307,10 @@
                             </table>
 
                             <!-- Định dạng totalPrice -->
-                            <fmt:formatNumber var="displayTotalPrice" value="${totalPrice}" type="number"
+                            <fmt:formatNumber var="displayTotalPrice" value="${requestScope.totalAmount}" type="number"
+                                              pattern="#,##0"
                                               groupingUsed="true"/>
-                            <fmt:formatNumber var="rawTotalPrice" value="${totalPrice}" type="number"
+                            <fmt:formatNumber var="rawTotalPrice" value="${requestScope.totalAmount}" type="number"
                                               groupingUsed="false" maxFractionDigits="0"/>
 
                             <!-- Hidden inputs -->
@@ -292,48 +332,28 @@
                         <!-- User Info -->
                         <div class="user-info">
                             <h3>Thông Tin Người Nhận</h3>
-                            <c:choose>
-                                <c:when test="${not empty sessionScope.user}">
-                                    <div class="form-group">
-                                        <label for="fullName">Họ và tên:</label>
-                                        <input type="text" id="fullName" name="fullName"
-                                               value="${sessionScope.user.name}" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="email">Email:</label>
-                                        <input type="email" id="email" name="email" value="${sessionScope.user.email}"
-                                               required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="phone">Số điện thoại:</label>
-                                        <input type="text" id="phone" name="phone"
-                                               value="${sessionScope.user.phoneNumber}" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="address">Địa chỉ giao hàng:</label>
-                                        <input type="text" id="address" name="address"
-                                               value="${sessionScope.user.address}" required>
-                                    </div>
-                                </c:when>
-                                <c:otherwise>
-                                    <div class="form-group">
-                                        <label for="fullName">Họ và tên:</label>
-                                        <input type="text" id="fullName" name="fullName" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="email">Email:</label>
-                                        <input type="email" id="email" name="email" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="phone">Số điện thoại:</label>
-                                        <input type="text" id="phone" name="phone" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="address">Địa chỉ giao hàng:</label>
-                                        <input type="text" id="address" name="address" required>
-                                    </div>
-                                </c:otherwise>
-                            </c:choose>
+                            <div class="form-group">
+                                <label for="fullName">Họ và tên:</label>
+                                <input type="text" id="fullName" name="fullName"
+                                       value="${sessionScope.user != null ? sessionScope.user.name : ""}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="email" id="email" name="email"
+                                       value="${sessionScope.user != null ? sessionScope.user.email : ""}"
+                                       required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Số điện thoại:</label>
+                                <input type="text" id="phone" name="phone"
+                                       value="${sessionScope.user != null ? sessionScope.user.phoneNumber : ""}"
+                                       required>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Địa chỉ giao hàng:</label>
+                                <input type="text" id="address" name="address"
+                                       value="${sessionScope.user != null ? sessionScope.user.address : ""}" required>
+                            </div>
                         </div>
 
                         <!-- Payment Method -->
@@ -416,7 +436,7 @@
         </div>
         <div class="footer__bottom">
             <div class="grid wide">
-                <p class="footer__text">2025 - Bản quyền thuộc về Công ti Những Vì Tinh Tú LigmaShop</p>
+                <p class="footer__text">2025 - Bản quyền thuộc về Công Ty Những Vì Tinh Tú LigmaShop</p>
             </div>
         </div>
     </footer>
