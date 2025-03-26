@@ -30,6 +30,11 @@ public class CheckoutServlet extends HttpServlet {
     private static final String vnp_ReturnUrl = "https://ligma-shop-49f1782b6042.herokuapp.com/vnpayreturn";
 
     @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doPost(request, response);
+    }
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json");

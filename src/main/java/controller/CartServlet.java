@@ -117,12 +117,10 @@ public class CartServlet extends HttpServlet {
         }
 
         try {
-
             String action = request.getParameter("action");
             if (action == null) {
                 action = "add";
             }
-
             if (action.equalsIgnoreCase("buynow")) {
                 int productSizeColorID = Integer.parseInt(request.getParameter("productSizeColorID"));
                 int quantity = Integer.parseInt(request.getParameter("quantity"));
@@ -149,7 +147,7 @@ public class CartServlet extends HttpServlet {
 
                 request.setAttribute("buyNowItem", buyNowItem);
                 request.setAttribute("buyNowAdjustedPrice", adjustedPrice);
-                request.setAttribute("totalAmount", buyNowTotalAmount);
+                request.setAttribute("buyNowTotalAmount", buyNowTotalAmount);
                 request.setAttribute("isBuyNow", true);
 
                 request.getRequestDispatcher("ligmaShop/payment/checkout.jsp").forward(request, response);
