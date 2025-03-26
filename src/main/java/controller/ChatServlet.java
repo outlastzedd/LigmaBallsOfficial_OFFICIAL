@@ -15,7 +15,7 @@ import org.json.JSONObject;
 
 @WebServlet(name = "ChatServlet", urlPatterns = {"/ChatServlet"})
 public class ChatServlet extends HttpServlet {
-    private static final String XAI_API_KEY = "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";
+    private static final String XAI_API_KEY = "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";
     private static final String API_URL = "https://openrouter.ai/api/v1/chat/completions";
     private final ChatbotDAO chatbotDAO = new ChatbotDAO();
 
