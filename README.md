@@ -1,3 +1,6 @@
+# [IMPORTANT] WEBSITE ACCESS
+View the final product by clicking [here](https://ligma-shop-49f1782b6042.herokuapp.com)
+
 # LigmaBallsOfficial - eCommerce Web Application
 Welcome to LigmaBallsOfficial, an eCommerce web application developed as part of the PRJ301 subject assignment. This project showcases a fully functional online shopping platform built with Java, leveraging modern web technologies and a robust database system. Designed to demonstrate core concepts of web development, this app includes features like product browsing, cart management, user authentication, and order processing.
 ## Project Overview
