@@ -117,11 +117,10 @@ public class AuthServlet extends HttpServlet {
             response.sendRedirect("ligmaShop/login/register.jsp?error=invalid_email");
             return;
         }
-        boolean check = userDAO.checkRegister(fullname, email, phone, password);
-        if (!check) {
+        Users user = userDAO.checkRegister(fullname, email, phone, password);
+        if (user == null) {
             request.setAttribute("user_existed_message", "Email hoặc số điện thoại dã tồn tại trong hệ thống!");
             request.getRequestDispatcher("ligmaShop/login/register.jsp?error=user_existed").forward(request, response);
-            return;
         } else {
             response.sendRedirect("ligmaShop/login/signIn.jsp?success=registered");
         }

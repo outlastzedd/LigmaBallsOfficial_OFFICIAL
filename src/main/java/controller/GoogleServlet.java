@@ -20,7 +20,6 @@ public class GoogleServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-
         String error = request.getParameter("error");
         if (error != null) {
             if (error.equalsIgnoreCase("access_denied")) {

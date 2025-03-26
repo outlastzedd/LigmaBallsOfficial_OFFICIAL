@@ -28,6 +28,7 @@ import java.util.Collection;
         @NamedQuery(name = "Users.GGLogin", query = "SELECT u FROM Users u WHERE u.email = :email"),
         @NamedQuery(name = "Users.checkExisting", query = "SELECT COUNT(u) FROM Users u WHERE u.email = :email OR u.phoneNumber = :phoneNumber")
 })
+
 public class Users implements Serializable {
 
     private static final long serialVersionUID = 1L;
