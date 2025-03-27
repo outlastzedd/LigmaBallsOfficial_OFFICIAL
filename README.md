@@ -1,5 +1,6 @@
 # [IMPORTANT] WEBSITE ACCESS
 View the final product by clicking [here](https://ligma-shop-49f1782b6042.herokuapp.com)
+
 Pull from `postgres-test-demo-otp` branch for up-to-date code.
 
 # LigmaBallsOfficial - eCommerce Web Application
