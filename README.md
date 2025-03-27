@@ -148,9 +148,9 @@ LigmaBallsOfficial/
 
 ## Contributing
 This is an academic project, but feel free to fork and experiment! Submit pull requests for bug fixes or enhancements. Ensure code follows university guidelines for PRJ301.
-##License
+## License
 This project is for educational purposes and not licensed for commercial use.
-##Acknowledgments
+## Acknowledgments
 - PRJ301 instructors for guidance.
 
 - University for providing this learning opportunity.
