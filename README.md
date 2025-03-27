@@ -42,103 +42,95 @@ We opted for PostgreSQL instead of SQL Server for several reasons:
 
 While our `pom.xml` includes the SQL Server JDBC driver (`mssql-jdbc`) for initial prototyping, we fully transitioned to PostgreSQL (`postgresql:42.7.3`) for production.
 ### Additional Libraries
-- <b>JSTL (JavaServer Pages Standard Tag Library)</b>: Simplifies JSP development with jakarta.servlet.jsp.jstl and taglibs-standard-impl.
+- <b>JSTL (JavaServer Pages Standard Tag Library)</b>: Simplifies JSP development with `jakarta.servlet.jsp.jstl` and `taglibs-standard-impl`.
 
-- <b>Gson & JSON Libraries</b>: JSON parsing and serialization with gson:2.9.1, json-simple:1.1.1, and org.json:20230227.
+- <b>Gson & JSON Libraries</b>: JSON parsing and serialization with `gson:2.9.1`, `json-simple:1.1.1`, and `org.json:20230227`.
 
-- <b>Apache HttpClient</b>: HTTP requests with httpclient:4.5.5, httpcore:4.4.9, and fluent-hc:4.5.5.
+- <b>Apache HttpClient</b>: HTTP requests with `httpclient:4.5.5`, `httpcore:4.4.9`, and `fluent-hc:4.5.5`.
 
-- <b>Jakarta Mail</b>: Email functionality (e.g., order confirmations) with jakarta.mail-api:2.1.3 and com.sun.mail:jakarta.mail:2.0.1.
+- <b>Jakarta Mail</b>: Email functionality (e.g., order confirmations) with `jakarta.mail-api:2.1.3` and `com.sun.mail:jakarta.mail:2.0.1`.
 
-- <b>Dotenv</b>: Environment variable management with dotenv-java:3.0.0 for secure configuration.
+- <b>Dotenv</b>: Environment variable management with `dotenv-java:3.0.0` for secure configuration.
 
-- <b>[Meteo Weather](https://open-meteo.com) API
+- <b>[Meteo Weather](https://open-meteo.com) API</b>
 
-## Build & Deployment
-Maven: Dependency management and WAR packaging with plugins like maven-war-plugin and maven-dependency-plugin.
 
-Heroku Webapp Runner: Deployment using webapp-runner:10.1.34.0 for running the WAR file on Heroku.
+### Build & Deployment
+- <b>Maven</b>: Dependency management and WAR packaging with plugins like `maven-war-plugin` and `maven-dependency-plugin`.
 
-Getting Started
-Prerequisites
-Java 21: Install the JDK (e.g., OpenJDK or Oracle JDK).
+- <b>Heroku Webapp Runner</b>: Deployment using `webapp-runner:10.1.34.0` for running the WAR file on Heroku.
 
-Maven 3.x: For building the project.
+## Getting Started
+### Prerequisites
+- **Java 21**: Install the JDK (e.g., OpenJDK or Oracle JDK).
 
-PostgreSQL: Local database setup (or use Heroku Postgres).
+- **Maven 3.x**: For building the project.
 
-Heroku CLI: For deployment.
+- **PostgreSQL**: Local database setup (or use Heroku Postgres).
 
-Git: Version control.
+- **Heroku CLI**: For deployment.
 
-Installation
-Clone the Repository:
-bash
+- **Git**: Version control.
 
+### Installation
+1. Clone the Repository:
+```bash
 git clone https://github.com/<your-username>/LigmaBallsOfficial.git
 cd LigmaBallsOfficial
+```
 
-Configure Environment:
-Create a .env file in the root directory:
-
+2. Configure Environment:
+- Create a .env file in the root directory:
+```
 DB_URL=jdbc:postgresql://localhost:5432/ligmashop
 DB_USERNAME=your_username
 DB_PASSWORD=your_password
+```
+- Update persistence.xml or application properties to match.
 
-Update persistence.xml or application properties to match.
-
-Set Up PostgreSQL:
-Create a database:
-sql
-
+3. Set Up PostgreSQL:
+- Create a database:
+```sql
 CREATE DATABASE ligmashop;
-
-Run schema scripts (if not using ddl-auto=create):
-bash
-
+```
+- Run schema scripts (if not using `ddl-auto=create`):
+```bash
 psql -U your_username -d ligmashop -f src/main/resources/schema.sql
-
-Build the Project:
-bash
-
+```
+4. Build the Project:
+```bash
 mvn clean package
-
-Run Locally:
-Use an embedded server like Tomcat or Jetty, or run with webapp-runner:
-bash
-
+```
+5. Run Locally:
+- Use an embedded server like Tomcat or Jetty, or run with webapp-runner:
+```bash
 java -jar target/dependency/webapp-runner.jar target/LigmaBallsOfficial-OFFICIAL.war
+```
+- Access at `http://localhost:8080`.
 
-Access at http://localhost:8080.
-
-Deployment to Heroku
-Create a Heroku App:
-bash
-
+### Deployment to Heroku
+1. Create a Heroku App:
+```bash
 heroku create ligma-balls-official
-
-Add PostgreSQL:
-bash
-
+```
+2. Add PostgreSQL:
+```bash
 heroku addons:create heroku-postgresql:hobby-dev
-
-Set Environment Variables:
-bash
-
+```
+3. Set Environment Variables:
+```bash
 heroku config:set DB_URL=$(heroku config:get DATABASE_URL)
-
-Deploy:
-bash
-
+```
+4. Deploy:
+```bash
 git push heroku main
-
-Open the App:
-bash
-
+```
+5. Open the App:
+```bash
 heroku open
-
-Project Structure
-
+```
+## Project Structure
+```
 LigmaBallsOfficial/
 ├── src/
 │   ├── main/
@@ -149,15 +141,16 @@ LigmaBallsOfficial/
 │   └── test/                 # Unit tests
 ├── pom.xml                   # Maven configuration
 └── README.md                 # This file
+```
 
-Contributing
+## Contributing
 This is an academic project, but feel free to fork and experiment! Submit pull requests for bug fixes or enhancements. Ensure code follows university guidelines for PRJ301.
-License
+##License
 This project is for educational purposes and not licensed for commercial use.
-Acknowledgments
-PRJ301 instructors for guidance.
+##Acknowledgments
+- PRJ301 instructors for guidance.
 
-University for providing this learning opportunity.
+- University for providing this learning opportunity.
 
-Open-source community for tools like PostgreSQL and Hibernate.
+- Open-source community for tools like PostgreSQL and Hibernate.
 
