@@ -1,5 +1,6 @@
 # [IMPORTANT] WEBSITE ACCESS
 View the final product by clicking [here](https://ligma-shop-49f1782b6042.herokuapp.com)
+Pull from `postgres-test-demo-otp` branch for up-to-date code.
 
 # LigmaBallsOfficial - eCommerce Web Application
 Welcome to LigmaBallsOfficial, an eCommerce web application developed as part of the PRJ301 subject assignment. This project showcases a fully functional online shopping platform built with Java, leveraging modern web technologies and a robust database system. Designed to demonstrate core concepts of web development, this app includes features like product browsing, cart management, user authentication, and order processing.
@@ -52,8 +53,9 @@ While our `pom.xml` includes the SQL Server JDBC driver (`mssql-jdbc`) for initi
 
 - <b>Dotenv</b>: Environment variable management with `dotenv-java:3.0.0` for secure configuration.
 
-- <b>[Meteo Weather](https://open-meteo.com) API</b>
+- <b>[Meteo Weather](https://open-meteo.com) API</b>: Customized product queries with weather integration.
 
+- **[OpenRouter AI](https://openrouter.ai) API**: Engaging chatbot for website.
 
 ### Build & Deployment
 - <b>Maven</b>: Dependency management and WAR packaging with plugins like `maven-war-plugin` and `maven-dependency-plugin`.
@@ -86,7 +88,7 @@ DB_URL=jdbc:postgresql://localhost:5432/ligmashop
 DB_USERNAME=your_username
 DB_PASSWORD=your_password
 ```
-- Update persistence.xml or application properties to match.
+- Update `persistence.xml` or application properties to match.
 
 3. Set Up PostgreSQL:
 - Create a database:
@@ -102,7 +104,7 @@ psql -U your_username -d ligmashop -f src/main/resources/schema.sql
 mvn clean package
 ```
 5. Run Locally:
-- Use an embedded server like Tomcat or Jetty, or run with webapp-runner:
+- Use an embedded server like Tomcat or Jetty, or run with `webapp-runner`:
 ```bash
 java -jar target/dependency/webapp-runner.jar target/LigmaBallsOfficial-OFFICIAL.war
 ```
